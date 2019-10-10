@@ -35,6 +35,6 @@ class StringUtil
   # are doubled and an o is put in between.
   # *Example:* 'StringUtil.kokify('ist') #=> 'isospop'
   def self.kokify(string)
-    string.gsub(/(?<match>[^aeiouAEIOU\d])/, '\k<match>o\k<match>')
+    string.gsub(/(?<match>[^aeiouAEIOU\d\W_])/, '\k<match>o\k<match>')
   end
 end
