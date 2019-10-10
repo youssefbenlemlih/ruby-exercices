@@ -1,6 +1,6 @@
 # A class used to read text files
-# Author::Youssef Benlemlih
-# Author::Jonas Krukenberg
+# Author:: Youssef Benlemlih
+# Author:: Jonas Krukenberg
 class TextEditor
   # content returns an alphabetically sorted word list where :
   # * all non-word characters are removed

@@ -1,6 +1,6 @@
 # A dummy script to show off the static methods of the class StringUtil
-# Author::Youssef Benlemlih
-# Author::Jonas Krukenberg
+# Author:: Youssef Benlemlih
+# Author:: Jonas Krukenberg
 require_relative('./classes/string_util')
 
 puts('Please enter the initial string:')

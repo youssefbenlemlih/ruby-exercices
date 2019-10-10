@@ -3,8 +3,8 @@
 # * Print the words in the file, one per line
 # * Saves the reversed words in a new file, one per line
 # * Prints statistics about the words usage
-# Author::Youssef Benlemlih
-# Author::Jonas Krukenberg
+# Author:: Youssef Benlemlih
+# Author:: Jonas Krukenberg
 
 require_relative './classes/text_editor'
 
