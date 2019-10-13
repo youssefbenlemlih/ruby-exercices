@@ -2,20 +2,17 @@
 # Author:: Youssef Benlemlih
 # Author:: Jonas Krukenberg
 class TextEditor
-  # content returns an alphabetically sorted word list where :
-  # * all non-word characters are removed
-  # * upcase characters are replaced by downcase ones
   attr_reader :content
   # Initialize a new instance of *TextEditor*
-  # with String @content and Array @modified_content
+  # with String @content
   # @param path: The path to the text file
   def initialize(path)
     File.open(path) { |f| @content = f.read }
   end
 
   # Returns an array of each word in @param
-  def words_to_array(content)
-    words = content.split
+  def words_to_array
+    words = @content.split
     word_list = []
     # filter the words list
     words.each do |word|
@@ -28,30 +25,33 @@ class TextEditor
       # only all non-empty word to the filtered list
       word_list.push(w) unless w.empty?
     end
-    word_list
+    @content = word_list
+    nil
   end
 
   # Returns the words list as an array, where each word is inverted
-  def reverse_words(word_list)
+  def reverse_words
     reversed_word_list = []
-    word_list.each { |word| reversed_word_list.push(word.reverse) }
+    @content.each { |word| reversed_word_list.push(word.reverse) }
     # return the reversed word list
-    reversed_word_list
+    @content = reversed_word_list
+    nil
   end
 
   # Saves the given wordlist in a file in the given path wit one word per line
-  def to_file(wordlist, filepath)
-    text = wordlist.join("\n")
+  def to_file(filepath)
+    text = @content.join("\n")
     File.open(filepath, 'w') { |f| f.write text }
+    nil
   end
 
   # Returns a Hash where:
   # * *key* is the word
   # * *value* is the occurrence of the usage of the word in the words list
-  def words_occurrences(words_array)
+  def words_occurrences
     # the default value of the occurrence of a word is 0
     word_count = Hash.new(0)
-    words_array.each { |word| word_count[word] += 1 }
+    @content.each { |word| word_count[word] += 1 }
     word_count
   end
 

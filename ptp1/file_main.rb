@@ -23,18 +23,21 @@ file_names.each do |file_name|
   # Question 2.2
   # Print the words of the file, one per line
   output "The words list of '#{file_name}' :"
-  words_array = text_editor.words_to_array(text_editor.content)
-  words_array.each { |word| puts word }
+  text_editor.words_to_array
+  text_editor.content.each { |word| puts word }
+  # save words_occurences from current content status
+  occurences = text_editor.words_occurrences
+  # changes content of text_editor to a list of reversed words
+  text_editor.reverse_words
   # Question 2.3
   # Saving the reversed words in a new file
   output "Saving reversed words list of '#{file_name}'..."
-  reversed_words = text_editor.reverse_words(words_array)
-  text_editor.to_file(reversed_words, "data/result_#{file_name}")
+  text_editor.to_file("data/result_#{file_name}")
   # Question 2.4
   # Words statistics
   output "Word statistics of #{file_name}"
   # print the statistics in a table
-  text_editor.words_occurrences(words_array).each do |key, value|
+  occurences.each do |key, value|
     puts "#{key}:#{' ' * (20 - key.length)}:  #{value}"
   end
 end
