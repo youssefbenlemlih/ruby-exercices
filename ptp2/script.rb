@@ -9,9 +9,9 @@ puts methods.sum(numbers)
 puts "\n[2] Produkt der Zahlen aus dem Array #{numbers.to_s}:"
 puts methods.product(numbers)
 
-collatz = methods.collatz(4)
+collatz = methods.collatz(10)
 puts "\n[3] Collatz-Folge"
 puts "Startwert: #{collatz['start']}, Index: #{collatz['index']}"
 
 puts "\n[4] Berechnung von Pi"
-methods.approximation_pi(10)
+methods.approx_pi(2)

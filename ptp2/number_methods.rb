@@ -5,9 +5,7 @@ class NumberMethods
   # returns the product of all numbers within the input array
   def sum(numbers = [])
     result = 0
-    numbers.each do |n|
-      result += n.to_i
-    end
+    numbers.each { |n| result += n.to_i }
     result
   end
 
@@ -16,19 +14,18 @@ class NumberMethods
   # returns the product of all numbers within the input array
   def product(numbers = [])
     result = 1
-    numbers.each do |n|
-      result = result * n.to_i
-    end
+    numbers.each { |n| result = result * n.to_i }
     result
   end
 
   # 3.1
   # the method expects an integer as a number
   # returns current index and start value
-  def collatz(number)
+  def collatz(start)
+    number = start
     if number > 0
       index = 0
-      while number != 1
+      until number == 1
         index += 1
         if number % 2 == 0
           number = number / 2
@@ -37,23 +34,23 @@ class NumberMethods
         end
         # puts number
       end
-      {'start' => number, 'index' => index}
+      {'start' => start, 'index' => index}
     end
   end
 
   # 3.2
-  def approximation_pi(precision)
-    k = 0
-    temp = 0.0
-    numbers = []
-    for k in 1..precision
-      number = ((-1.0) ** k) / (2.0 * k + 1.0)
-      next_number = ((-1.0) ** (k + 1.0) / (2.0 * (k + 1.0) + 1.0))
-      numbers << ((number + next_number) / 2.0)
+  def approx_pi(precision)
+    pi_4 = 1
+    pi_4_before = 0
+    curr_precision = 0
+    k = 1
+    until curr_precision == precision
+      add_num = ((-1.0) ** k) / (2.0 * k + 1.0)
+      pi_4 += add_num
+      curr_precision += 1 if (pi_4 * 4).truncate(curr_precision) == (pi_4_before * 4).truncate(curr_precision)
+      pi_4_before = pi_4
+      puts sprintf("%d: %.5f\tPräzision: %d\tAbweichung: %+.5f", k, pi_4 * 4, curr_precision, pi_4 * 4 - Math::PI)
       k += 1
-      puts number
     end
-
-    puts numbers.to_s
   end
 end
