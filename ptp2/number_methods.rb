@@ -59,7 +59,7 @@ class NumberMethods
   end
 
   def approx_1(precision)
-    if precision <1 && precision>0
+    if precision < 1 && precision > 0
       i = 0
       k = 2
       values = []
@@ -74,6 +74,23 @@ class NumberMethods
     else
       {'values' => [], 'index' => -1, 'sum' => 0}
     end
+  end
+
+  def egyptian_multiplication(a, b)
+    a = a.to_i
+    arr = [[a,b]]
+    while a != 1
+      a /= 2
+      b *= 2
+      arr.push([a, b])
+    end
+    sum = 0
+    arr.each do |e|
+      if e[0]%2 != 0
+        sum += e[1]
+      end
+    end
+    sum
   end
 
   def faculty(i)

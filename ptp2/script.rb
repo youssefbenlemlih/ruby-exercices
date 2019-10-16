@@ -29,4 +29,11 @@ precision = 10 ** -1
   precision *= 10**- 1
 end
 
+puts "\n[3.4] Aethiopische Multiplikation"
+5.times do
+  a = rand(0...12)
+  b = rand(0...12)
+  result =  methods.egyptian_multiplication(a,b)
+  puts "#{a} * #{b} = #{result}"
+end
 
