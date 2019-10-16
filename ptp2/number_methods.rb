@@ -66,9 +66,9 @@ class NumberMethods
       loop do
         curr_value = (k - 1) / faculty(k).to_f
         values.push curr_value
+        break if (1 - sum(values)) <= precision
         i += 1
         k += 1
-        break if (1 - sum(values)) <= precision
       end
       {'values' => values, 'index' => i, 'sum' => sum(values)}
     else
