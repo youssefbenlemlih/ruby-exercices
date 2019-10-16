@@ -1,11 +1,14 @@
 # Author:: Jonas Krukenberg
+# Author:: Youssef Benlemlih
 class NumberMethods
   # 1.
   # expects an array with numbers
   # returns the product of all numbers within the input array
   def sum(numbers)
     result = 0
-    numbers.each { |n| result += n.to_i }
+    numbers.each do |n|
+      result += n
+    end
     result
   end
 
@@ -14,7 +17,7 @@ class NumberMethods
   # returns the product of all numbers within the input array
   def product(numbers)
     result = 1
-    numbers.each { |n| result = result * n.to_i }
+    numbers.each { |n| result *= n }
     result
   end
 
@@ -48,10 +51,36 @@ class NumberMethods
       pi_4_before = pi_4
       add_num = ((-1.0) ** k) / (2.0 * k + 1.0)
       pi_4 += add_num
-      curr_precision += 1 if (pi_4 * 4).truncate(curr_precision+1) == (pi_4_before * 4).truncate(curr_precision+1)
+      curr_precision += 1 if (pi_4 * 4).truncate(curr_precision + 1) == (pi_4_before * 4).truncate(curr_precision + 1)
       # puts sprintf("%d: %.10f\tPräzision: %d\tAbweichung: %+.5f pi:#{result} pi_bf:#{pi_4_before*4}", k, pi_4 * 4, curr_precision, pi_4 * 4 - Math::PI)
       k += 1
     end
     (pi_4 * 4).truncate(precision)
+  end
+
+  def approx_1(precision)
+    if precision <1 && precision>0
+      i = 0
+      k = 2
+      values = []
+      loop do
+        curr_value = (k - 1) / faculty(k).to_f
+        values.push curr_value
+        i += 1
+        k += 1
+        break if (1 - sum(values)) <= precision
+      end
+      {'values' => values, 'index' => i, 'sum' => sum(values)}
+    else
+      {'values' => [], 'index' => -1, 'sum' => 0}
+    end
+  end
+
+  def faculty(i)
+    result = 1
+    i.times do |index|
+      result *= (index + 1)
+    end
+    result
   end
 end
