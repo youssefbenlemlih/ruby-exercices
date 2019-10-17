@@ -12,12 +12,14 @@ puts methods.product(numbers)
 
 collatz = methods.collatz(10)
 puts "\n[3.1] Collatz-Folge"
-puts collatz ? "Startwert: #{collatz['start']}, Index: #{collatz['index']}" : "Falscher Startwert"
+puts collatz ? "Startwert: #{collatz['start']}, Index: #{collatz['index']}" : 'Falscher Startwert'
 
 puts "\n[3.2] Berechnung von Pi"
 precision = 0
-3.times do
-  puts "PI mit der Genauigkeit von #{precision} Nachkommastellen: #{methods.approx_pi(precision)}"
+4.times do
+  pi = methods.approx_pi(precision)
+  puts "PI mit der Genauigkeit von #{precision} Nachkommastellen: #{pi}"
+  puts "\tAls Bruch: #{pi.to_r}"
   precision += 1
 end
 
@@ -26,11 +28,19 @@ precision = 10**-1
 8.times do
   result = methods.approx_1(precision)
   puts "Konvergenz gegen 1 mit einer Genauigkeit von #{precision}:"
-  puts result ? "\tWerte: #{result['values'].to_s}\n\tIndex: #{result['index']}\n\tSum: #{result['sum']}" : "Ungueltige Genauigkeit!"
+  if result
+    puts "\tWerte (Float): #{result['values_f'].to_s}"
+    puts "\tWerte (Bruch): #{result['values_r'].to_s}"
+    puts "\tSumme (Float): #{result['sum_f']}"
+    puts "\tSumme (Bruch): #{result['sum_r']}"
+    puts "\tIndex: #{result['index']}"
+  else
+    puts 'Ungueltige Genauigkeit!'
+  end
   precision *= 10**-1
 end
 
-puts "\n[3.4] Aethiopische Multiplikation"
+puts "\n[4] Aethiopische Multiplikation"
 5.times do
   a = rand(0...6)
   b = rand(7...12)
