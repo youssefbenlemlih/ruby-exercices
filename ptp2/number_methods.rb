@@ -30,16 +30,11 @@ class NumberMethods
       index = 0
       until number == 1
         index += 1
-        if number % 2 == 0
-          number = number / 2
-        else
-          number = 3 * number + 1
-        end
+        number = number.even? ? number / 2 : 3 * number + 1
       end
       {'start' => start, 'index' => index}
-    else
-      nil
     end
+    nil
   end
 
   # 3.2
@@ -49,7 +44,7 @@ class NumberMethods
     k = 0
     until curr_precision == precision
       pi_4_before = pi_4
-      add_num = ((-1.0) ** k) / (2.0 * k + 1.0)
+      add_num = ((-1.0)**k) / (2.0 * k + 1.0)
       pi_4 += add_num
       curr_precision += 1 if (pi_4 * 4).truncate(curr_precision + 1) == (pi_4_before * 4).truncate(curr_precision + 1)
       # puts sprintf("%d: %.10f\tPräzision: %d\tAbweichung: %+.5f pi:#{result} pi_bf:#{pi_4_before*4}", k, pi_4 * 4, curr_precision, pi_4 * 4 - Math::PI)
@@ -60,35 +55,28 @@ class NumberMethods
 
   def approx_1(precision)
     if precision < 1 && precision > 0
-      i = 0
       k = 2
       values = []
       loop do
         curr_value = (k - 1) / faculty(k).to_f
         values.push curr_value
         break if (1 - sum(values)) <= precision
-        i += 1
+
         k += 1
       end
-      {'values' => values, 'index' => i, 'sum' => sum(values)}
+      {'values' => values, 'index' => k - 2, 'sum' => sum(values)}
     else
       {'values' => [], 'index' => -1, 'sum' => 0}
     end
   end
 
-  def egyptian_multiplication(a, b)
+  def aethiopian_multiplication(a, b)
     a = a.to_i
-    arr = [[a,b]]
-    while a != 1
+    sum = 0
+    while a >= 1
       a /= 2
       b *= 2
-      arr.push([a, b])
-    end
-    sum = 0
-    arr.each do |e|
-      if e[0]%2 != 0
-        sum += e[1]
-      end
+      sum += b unless a.even?
     end
     sum
   end

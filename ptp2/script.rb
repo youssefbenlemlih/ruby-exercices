@@ -16,24 +16,25 @@ puts collatz ? "Startwert: #{collatz['start']}, Index: #{collatz['index']}" : "F
 
 puts "\n[3.2] Berechnung von Pi"
 precision = 0
-1.times do
-  puts "PI mit der Genauigkeit von #{precision} Nachkommastellen : #{methods.approx_pi(precision)}"
+3.times do
+  puts "PI mit der Genauigkeit von #{precision} Nachkommastellen: #{methods.approx_pi(precision)}"
   precision += 1
 end
 
 puts "\n[3.3] Konvergenz gegen 1"
-precision = 10 ** -1
+precision = 10**-1
 8.times do
   result = methods.approx_1(precision)
-  puts "Konvergenz gegen 1 mit einer Genauigkeit von #{precision}: \n\tWerte: #{result['values'].to_s}\n\tIndex: #{result['index']}\n\tSum: #{result['sum']}"
-  precision *= 10**- 1
+  puts "Konvergenz gegen 1 mit einer Genauigkeit von #{precision}:"
+  puts "\tWerte: #{result['values'].to_s}\n\tIndex: #{result['index']}\n\tSum: #{result['sum']}"
+  precision *= 10**-1
 end
 
 puts "\n[3.4] Aethiopische Multiplikation"
 5.times do
   a = rand(0...12)
   b = rand(0...12)
-  result =  methods.egyptian_multiplication(a,b)
+  result = methods.aethiopian_multiplication(a, b)
   puts "#{a} * #{b} = #{result}"
 end
 
