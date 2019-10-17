@@ -39,19 +39,18 @@ class NumberMethods
 
   # 3.2
   def approx_pi(precision)
-    pi_4_r = 0/1r
-    pi_4_f = 0.0
+    pi_4 = 0
     curr_precision = -1
     k = 0
     until curr_precision == precision
-      pi_4_before = pi_4_f
-      add_num = Rational((-1)**k, 2 * k + 1)
-      pi_4_r += add_num
-      pi_4_f = pi_4_r.to_f
-      curr_precision += 1 if (pi_4_f * 4).truncate(curr_precision + 1) == (pi_4_before * 4).truncate(curr_precision + 1)
+      pi_4_before = pi_4
+      add_num = ((-1.0) ** k) / (2.0 * k + 1.0)
+      pi_4 += add_num
+      curr_precision += 1 if (pi_4 * 4).truncate(curr_precision + 1) == (pi_4_before * 4).truncate(curr_precision + 1)
+      # puts sprintf("%d: %.10f\tPräzision: %d\tAbweichung: %+.5f pi:#{result} pi_bf:#{pi_4_before*4}", k, pi_4 * 4, curr_precision, pi_4 * 4 - Math::PI)
       k += 1
     end
-    (pi_4_f * 4).truncate(precision)
+    (pi_4 * 4).truncate(precision)
   end
 
   # 3.3

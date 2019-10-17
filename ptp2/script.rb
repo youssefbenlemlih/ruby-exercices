@@ -16,10 +16,10 @@ puts collatz ? "Startwert: #{collatz['start']}, Index: #{collatz['index']}" : 'F
 
 puts "\n[3.2] Berechnung von Pi"
 precision = 0
-4.times do
+7.times do
   pi = methods.approx_pi(precision)
   puts "PI mit der Genauigkeit von #{precision} Nachkommastellen: #{pi}"
-  puts "\tAls Bruch: #{pi.to_r}"
+  puts "\tAls Bruch: #{Rational(pi.to_s)}"
   precision += 1
 end
 
