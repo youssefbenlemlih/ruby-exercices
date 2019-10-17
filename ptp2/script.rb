@@ -26,15 +26,15 @@ precision = 10**-1
 8.times do
   result = methods.approx_1(precision)
   puts "Konvergenz gegen 1 mit einer Genauigkeit von #{precision}:"
-  puts "\tWerte: #{result['values'].to_s}\n\tIndex: #{result['index']}\n\tSum: #{result['sum']}"
+  puts result ? "\tWerte: #{result['values'].to_s}\n\tIndex: #{result['index']}\n\tSum: #{result['sum']}" : "Ungueltige Genauigkeit!"
   precision *= 10**-1
 end
 
 puts "\n[3.4] Aethiopische Multiplikation"
 5.times do
-  a = rand(0...12)
-  b = rand(0...12)
-  result = methods.aethiopian_multiplication(a, b)
+  a = rand(0...6)
+  b = rand(7...12)
+  result = methods.ethiopian_multiplication(a, b)
   puts "#{a} * #{b} = #{result}"
 end
 

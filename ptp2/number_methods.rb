@@ -32,7 +32,7 @@ class NumberMethods
         index += 1
         number = number.even? ? number / 2 : 3 * number + 1
       end
-      {'start' => start, 'index' => index}
+      return {'start' => start, 'index' => index}
     end
     nil
   end
@@ -44,7 +44,7 @@ class NumberMethods
     k = 0
     until curr_precision == precision
       pi_4_before = pi_4
-      add_num = ((-1.0)**k) / (2.0 * k + 1.0)
+      add_num = ((-1.0) ** k) / (2.0 * k + 1.0)
       pi_4 += add_num
       curr_precision += 1 if (pi_4 * 4).truncate(curr_precision + 1) == (pi_4_before * 4).truncate(curr_precision + 1)
       # puts sprintf("%d: %.10f\tPräzision: %d\tAbweichung: %+.5f pi:#{result} pi_bf:#{pi_4_before*4}", k, pi_4 * 4, curr_precision, pi_4 * 4 - Math::PI)
@@ -64,19 +64,17 @@ class NumberMethods
 
         k += 1
       end
-      {'values' => values, 'index' => k - 2, 'sum' => sum(values)}
-    else
-      {'values' => [], 'index' => -1, 'sum' => 0}
+      return {'values' => values, 'index' => k - 2, 'sum' => sum(values)}
     end
+    nil
   end
 
-  def aethiopian_multiplication(a, b)
-    a = a.to_i
+  def ethiopian_multiplication(a, b)
     sum = 0
     while a >= 1
+      sum += b if a.odd?
       a /= 2
       b *= 2
-      sum += b unless a.even?
     end
     sum
   end
