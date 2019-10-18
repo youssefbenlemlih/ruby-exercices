@@ -15,12 +15,11 @@ puts "\n[3.1] Collatz-Folge"
 puts collatz ? "Startwert: #{collatz['start']}, Index: #{collatz['index']}" : 'Falscher Startwert'
 
 puts "\n[3.2] Berechnung von Pi"
-precision = 0
-7.times do
+6.times do |i|
+  precision = 10**-(i + 1)
   pi = methods.approx_pi(precision)
-  puts "PI mit der Genauigkeit von #{precision} Nachkommastellen: #{pi}"
+  puts "PI mit der Genauigkeit von #{precision}: #{pi}"
   puts "\tAls Bruch: #{Rational(pi.to_s)}"
-  precision += 1
 end
 
 puts "\n[3.3] Konvergenz gegen 1"
