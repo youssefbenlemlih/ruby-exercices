@@ -5,20 +5,14 @@ class NumberMethods
   # expects an array with numbers
   # returns the product of all numbers within the input array
   def sum(numbers)
-    result = 0
-    numbers.each do |n|
-      result += n
-    end
-    result
+    numbers.inject(0) { |result, num| result += num }
   end
 
   # 2.
   # expects an array with numbers
   # returns the product of all numbers within the input array
   def product(numbers)
-    result = 1
-    numbers.each { |n| result *= n }
-    result
+    numbers.inject(1) { |result, num| result *= num }
   end
 
   # 3.1
@@ -40,16 +34,14 @@ class NumberMethods
   # 3.2
   def approx_pi(rational)
     pi_4 = 0
-    curr_precision = -1
     k = 0
     precision = rational.to_s.count('0')
-    until curr_precision == precision
+    begin
       pi_4_before = pi_4
       pi_4 += ((-1.0)**k) / (2.0 * k + 1.0)
-      curr_precision += 1 if (pi_4 * 4).truncate(curr_precision + 1) == (pi_4_before * 4).truncate(curr_precision + 1)
       k += 1
-    end
-    (pi_4 * 4).truncate(precision)
+    end until (pi_4 * 4).floor(precision) == (pi_4_before * 4).floor(precision)
+    (pi_4 * 4).floor(precision)
   end
 
   # 3.3

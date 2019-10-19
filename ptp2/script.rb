@@ -41,8 +41,8 @@ end
 
 puts "\n[4] Aethiopische Multiplikation"
 5.times do
-  a = rand(0...6)
-  b = rand(7...12)
+  a = rand(0...12)
+  b = rand(0...12)
   result = methods.ethiopian_multiplication(a, b)
   puts "#{a} * #{b} = #{result}"
 end
