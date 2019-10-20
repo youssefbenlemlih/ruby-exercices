@@ -75,6 +75,12 @@ class Algebra
   # expects int a and int b as factors for multiplikation
   # returns product of a * b
   def ethiopian_multiplication(a, b)
+    if a>b
+      # a should be smaller than b
+      tmp = a
+      a = b
+      b = tmp
+    end
     sum = 0
     while a >= 1
       sum += b if a.odd?
