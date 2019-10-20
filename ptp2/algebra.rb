@@ -1,6 +1,6 @@
 # Author:: Jonas Krukenberg
 # Author:: Youssef Benlemlih
-class NumberMethods
+class Algebra
   # 1.
   # expects an array with numbers
   # returns the product of all numbers within the input array
