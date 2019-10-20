@@ -5,21 +5,21 @@ class NumberMethods
   # expects an array with numbers
   # returns the product of all numbers within the input array
   def sum(numbers)
-    numbers.inject(0) { |result, num| result += num }
+    numbers.inject(0) { |result, num| result + num }
   end
 
   # 2.
   # expects an array with numbers
   # returns the product of all numbers within the input array
   def product(numbers)
-    numbers.inject(1) { |result, num| result *= num }
+    numbers.inject(1) { |result, num| result * num }
   end
 
   # 3.1
   # the method expects an integer as a number
   # returns current index and start value
   def collatz(start)
-    if start > 0
+    if start.positive?
       number = start
       index = 0
       until number == 1
@@ -46,7 +46,7 @@ class NumberMethods
 
   # 3.3
   def approx_1(precision)
-    if precision < 1 && precision > 0
+    if precision < 1 && precision.positive?
       k = 2
       values_r = []
       values_f = []
