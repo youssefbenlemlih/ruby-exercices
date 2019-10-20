@@ -32,6 +32,8 @@ class Algebra
   end
 
   # 3.2
+  # expects rational precision (1/10, 1/100, ...)
+  # returns pi with the given precision
   def approx_pi(rational)
     pi_4 = 0
     k = 0
@@ -45,6 +47,8 @@ class Algebra
   end
 
   # 3.3
+  # expects rational precision < 1 and > 0
+  # returns 1 with the given precision
   def approx_1(precision)
     if precision < 1 && precision.positive?
       k = 2
@@ -68,6 +72,8 @@ class Algebra
   end
 
   # 4.
+  # expects int a and int b as factors for multiplikation
+  # returns product of a * b
   def ethiopian_multiplication(a, b)
     sum = 0
     while a >= 1
