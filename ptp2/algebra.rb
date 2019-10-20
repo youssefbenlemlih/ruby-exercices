@@ -42,7 +42,7 @@ class Algebra
       pi_4_before = pi_4
       pi_4 += ((-1.0)**k) / (2.0 * k + 1.0)
       k += 1
-    end until  (pi_4 * 4).floor(precision) == (pi_4_before * 4).floor(precision)
+    end until (pi_4 * 4).floor(precision) == (pi_4_before * 4).floor(precision)
     (pi_4 * 4).floor(precision)
   end
 
