@@ -27,7 +27,12 @@ class Interface
     num = (first_input.match(/\d*/)[0]).to_i
     unit_from = first_input.delete_prefix(num.to_s)
     unit_to = second_input
-    puts "#{first_input} = #{@converter.convert(num,unit_from,unit_to)} #{unit_to}"
+    result = @converter.convert(num,unit_from,unit_to)
+    if result
+      puts "#{first_input} = #{result} #{unit_to}"
+    else
+      puts "Kann nicht von #{unit_from} zu #{unit_to} konvertieren"
+    end
   end
   def valid_first_input?(input)
     matches = /^\d+([a-z].*)/m.match(input)
