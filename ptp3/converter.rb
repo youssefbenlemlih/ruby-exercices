@@ -19,9 +19,9 @@ class Converter
     b1 =base_unit(u1)
     b2 =base_unit(u2)
     if b1 && b2 && b1 == b2
-      return num * @factors[b1][u1] / @factors[b2][u2]
+      num * @factors[b1][u1] / @factors[b2][u2]
     else
-      return nil
+      nil
     end
   end
 
@@ -34,13 +34,12 @@ class Converter
   end
 
   def base_unit(u)
-    # @factors.each_value do |v|
-    #   if v.keys.include?(u)
-    #     return v
-    #   end
-    # end
-    # nil
-    "m"
+    @factors.each do |k,v|
+      if v.keys.include?(u)
+        return k
+      end
+    end
+    nil
   end
 
 end
