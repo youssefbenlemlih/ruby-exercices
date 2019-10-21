@@ -1,23 +1,11 @@
+require 'json'
+
 class Converter
   def initialize
-    @factors = {
-        "m" => {
-            "km" => 1000,
-            "in" => 0.0254,
-            "ft" => 0.3048,
-            "yd" => 0.9144,
-            "mile" => 1609.34,
-            "potrzebie" => 0.002263,
-            "m" => 1,
-            "cm" => 0.01,
-            "mm" => 0.001
-        },
-        "g" => {
-            "g" => 1,
-            "kg" => 1000,
-            "t" => 1000000
-        }
-    }
+    File.open('units_config.json') do |file|
+      units_config = file.read.chomp
+      @factors = JSON.parse(units_config)
+    end
   end
 
   def convert(num, u1, u2)
