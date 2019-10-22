@@ -40,7 +40,7 @@ class Interface
   end
 
   def valid_first_input?(input)
-    unit = input[/^[\d.]+([a-z].*)/m, 1]
+    unit = input[/^\d+.*([a-z].*)/m, 1]
     @allowed_units.include?(unit)
   end
 
