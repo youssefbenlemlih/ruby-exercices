@@ -19,14 +19,15 @@ class Interface
         puts 'Ungueltige Eingabe. Bitte erneut versuchen [Bsp:50mm]'
         first_input = next_input
       end
+      num = (first_input[/[\d.]+/]).to_f
+      unit_from = (first_input[/[a-z]+.*/])
+
       puts 'Was ist die Zieleinheit, zu der Sie umrechnen wollen? [Bsp:mm]'
       second_input = next_input
-      until valid_second_input?(second_input)
+      until valid_second_input?(unit_from, second_input)
         puts 'Ungueltige Eingabe. Bitte erneut versuchen [Bsp:cm]'
         second_input = next_input
       end
-      num = first_input[/[\d.]+/].to_f
-      unit_from = first_input[/[a-z]+.*/]
       unit_to = second_input
       result = @converter.convert(num, unit_from, unit_to)
       if result
@@ -43,7 +44,7 @@ class Interface
     @allowed_units.include?(unit)
   end
 
-  def valid_second_input?(input)
-    @allowed_units.include?(input)
+  def valid_second_input?(unit_from, second_input)
+    @converter.base_unit(unit_from) == @converter.base_unit(second_input)
   end
 end

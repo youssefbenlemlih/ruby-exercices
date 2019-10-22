@@ -9,12 +9,8 @@ class Converter
   end
 
   def convert(num, u1, u2)
-    b1 = base_unit(u1)
-    b2 = base_unit(u2)
-    if b1 && b2 && b1 == b2
-      return num * @factors[b1][u1] / @factors[b2][u2]
-    end
-    nil
+    b = base_unit(u1)
+    num * @factors[b][u1] / @factors[b][u2]
   end
 
   def list_units

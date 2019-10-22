@@ -3,7 +3,7 @@
 require_relative 'algebra'
 algebra = Algebra.new
 
-numbers = [1, 9, 10]
+numbers = [1, 9, 10, 's', Rational(5,11), Complex(1,1)]
 puts "[1] Summe der Zahlen aus dem Array #{numbers.to_s}:"
 puts algebra.sum(numbers)
 

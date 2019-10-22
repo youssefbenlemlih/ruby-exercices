@@ -5,14 +5,14 @@ class Algebra
   # expects an array with numbers
   # returns the product of all numbers within the input array
   def sum(numbers)
-    numbers.inject(0) { |result, num| result + num }
+    numbers.inject(0) { |result, num| num.is_a?(Numeric) ? result + num : result }
   end
 
   # 2.
   # expects an array with numbers
   # returns the product of all numbers within the input array
   def product(numbers)
-    numbers.inject(1) { |result, num| result * num }
+    numbers.inject(1) { |result, num| num.is_a?(Numeric) ? result * num : result }
   end
 
   # 3.1
