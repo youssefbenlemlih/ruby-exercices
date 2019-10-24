@@ -40,11 +40,11 @@ class Interface
   end
 
   def valid_first_input?(input)
-    unit = input[/^\d+.*([a-z].*)/m, 1]
+    unit = input[/^[\d .]+(.*)/m, 1]
     @allowed_units.include?(unit)
   end
 
   def valid_second_input?(unit_from, second_input)
-    @converter.base_unit(unit_from) == @converter.base_unit(second_input)
+    @converter.unit_category(unit_from) == @converter.unit_category(second_input)
   end
 end
