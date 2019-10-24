@@ -1,56 +1,116 @@
 {
   "length": {
-    "operation": "multiply",
     "precision": 3,
     "units": {
-      "km": 1000.0,
-      "in": 0.0254,
-      "ft": 0.3048,
-      "yd": 0.9144,
-      "mile": 1609.34,
-      "potrzebie": 0.002263,
-      "mp": 0.000002263,
-      "kp": 2.263,
-      "fp": 2263.0,
-      "m": 1.0,
-      "cm": 0.01,
-      "mm": 0.001
+      "km": {
+        "factor": 1000.0,
+        "delta": 0
+      },
+      "in": {
+        "factor": 0.0254,
+        "delta": 0
+      },
+      "ft": {
+        "factor": 0.3048,
+        "delta": 0
+      },
+      "yd": {
+        "factor": 0.9144,
+        "delta": 0
+      },
+      "mile": {
+        "factor": 1609.34,
+        "delta": 0
+      },
+      "potrzebie": {
+        "factor": 0.002263,
+        "delta": 0
+      },
+      "mp": {
+        "factor": 0.000002263,
+        "delta": 0
+      },
+      "kp": {
+        "factor": 2.263,
+        "delta": 0
+      },
+      "fp": {
+        "factor": 2263.0,
+        "delta": 0
+      },
+      "m": {
+        "factor": 1.0,
+        "delta": 0
+      },
+      "cm": {
+        "factor": 0.01,
+        "delta": 0
+      },
+      "mm": {
+        "factor": 0.001,
+        "delta": 0
+      }
     }
   },
   "mass": {
-    "operation": "multiply",
     "precision": 3,
     "units": {
-      "g": 1.0,
-      "ngogn": 11.59,
-      "ounce": 28.35,
-      "blintz": 36.43,
-      "kg": 1000,
-      "kn": 11590.0,
-      "t": 1000000,
-      "zentner": 50000.0
+      "g": {
+        "factor": 1.0,
+        "delta": 0
+      },
+      "ngogn": {
+        "factor": 11.59,
+        "delta": 0
+      },
+      "ounce": {
+        "factor": 28.35,
+        "delta": 0
+      },
+      "blintz": {
+        "factor": 36.43,
+        "delta": 0
+      },
+      "kg": {
+        "factor": 1000,
+        "delta": 0
+      },
+      "kn": {
+        "factor": 11590.0,
+        "delta": 0
+      },
+      "t": {
+        "factor": 1000000,
+        "delta": 0
+      },
+      "zentner": {
+        "factor": 50000.0,
+        "delta": 0
+      }
     }
   },
   "temperature": {
-    "operation": "formular",
     "precision": 2,
     "units": {
+      "kelvin": {
+        "factor": 1,
+        "delta": 0
+      },
       "celsius": {
-        "from-kelvin": "%temp% - 273.15",
-        "to-kelvin": "%temp% + 273.15"
+        "factor": 1,
+        "delta": 273.5
       },
       "fahrenheit": {
-        "from-kelvin": "(%temp% - 273.15) * 1.8 + 32",
-        "to-kelvin": "((%temp% - 32.0) * (5/9)) + 273.15"
+        "factor": 0.555555555555,
+        "delta": 255.37222222222
       },
       "smurdley": {
-        "from-kelvin": "%temp% - 0.15",
-        "to-kelvin": "%temp% + 0.15"
+        "factor": 1,
+        "delta": 0.15
       }
     }
   },
   "oldunit": {
-    "operation": "count",
     "precision": 0,
     "units": {
       "dutzend": 12,

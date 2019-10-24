@@ -1,0 +1,62 @@
+{
+  "length": {
+    "operation": "multiply",
+    "precision": 3,
+    "units": {
+      "km": 1000.0,
+      "in": 0.0254,
+      "ft": 0.3048,
+      "yd": 0.9144,
+      "mile": 1609.34,
+      "potrzebie": 0.002263,
+      "mp": 0.000002263,
+      "kp": 2.263,
+      "fp": 2263.0,
+      "m": 1.0,
+      "cm": 0.01,
+      "mm": 0.001
+    }
+  },
+  "mass": {
+    "operation": "multiply",
+    "precision": 3,
+    "units": {
+      "g": 1.0,
+      "ngogn": 11.59,
+      "ounce": 28.35,
+      "blintz": 36.43,
+      "kg": 1000,
+      "kn": 11590.0,
+      "t": 1000000,
+      "zentner": 50000.0
+    }
+  },
+  "temperature": {
+    "operation": "formular",
+    "precision": 2,
+    "units": {
+      "celsius": {
+        "from-kelvin": "%temp% - 273.15",
+        "to-kelvin": "%temp% + 273.15"
+      },
+      "fahrenheit": {
+        "from-kelvin": "(%temp% - 273.15) * 1.8 + 32",
+        "to-kelvin": "((%temp% - 32.0) * (5/9)) + 273.15"
+      },
+      "smurdley": {
+        "from-kelvin": "%temp% - 0.15",
+        "to-kelvin": "%temp% + 0.15"
+      }
+    }
+  },
+  "oldunit": {
+    "operation": "count",
+    "precision": 0,
+    "units": {
+      "dutzend": 12,
+      "mandel": 15,
+      "schock": 60,
+      "gross": 144
+    }
+  }
+}
