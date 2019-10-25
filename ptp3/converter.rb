@@ -10,7 +10,8 @@ class Converter
 
   def convert(num, u1, u2)
     units = @units_config[unit_category(u1)]['units']
-    num * (units[u1]['factor'] - units[u1]['delta']) / (units[u2]['factor'] - units[u2]['delta'])
+    num * (units[u1]['factor'].to_r + units[u1]['delta']) /
+      (units[u2]['factor'].to_r + units[u2]['delta'])
   end
 
   def convert_with_formular(cat, num, u1, u2)

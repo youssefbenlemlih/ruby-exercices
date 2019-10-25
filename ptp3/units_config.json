@@ -92,21 +92,21 @@
   "temperature": {
     "precision": 2,
     "units": {
-      "kelvin": {
+      "celsius": {
         "factor": 1,
         "delta": 0
       },
-      "celsius": {
-        "factor": 1,
-        "delta": 273.5
-      },
       "fahrenheit": {
-        "factor": 0.555555555555,
-        "delta": 255.37222222222
+        "factor": "5/9",
+        "delta": -32
       },
       "smurdley": {
         "factor": 1,
-        "delta": 0.15
+        "delta": -273
+      },
+      "kelvin": {
+        "factor": 1,
+        "delta": 273.15
       }
     }
   },
