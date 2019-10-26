@@ -5,7 +5,7 @@ require_relative 'converter'
 class Interface
   def initialize
     @converter = Converter.new
-    @allowed_units = @converter.list_units
+    @all_units = @converter.list_units
   end
 
   def next_input
@@ -16,18 +16,22 @@ class Interface
   def interact
     begin
       puts 'Welchen Wert wollen Sie umrechnen? [Bsp:100km]'
+      puts "Erlaubte Einheiten: #{@all_units.to_s}"
       first_input = next_input
       until valid_first_input?(first_input)
         puts 'Ungueltige Eingabe. Bitte erneut versuchen [Bsp:50 mm]'
+        puts "Erlaubte Einheiten: #{@all_units.to_s}"
         first_input = next_input
       end
       num = (first_input[/[-\d.]+/]).to_f
       unit_from = (first_input[/[a-z]+.*/])
 
-      puts 'Was ist die Zieleinheit, zu der Sie umrechnen wollen? [Bsp:mm]'
+      puts 'Was ist die Zieleinheit, zu der Sie umrechnen wollen?'
+      puts "Erlaubte Einheiten: #{allowed_units(unit_from)}"
       second_input = next_input
       until valid_second_input?(unit_from, second_input)
         puts 'Ungueltige Eingabe. Bitte erneut versuchen'
+        puts "Erlaubte Einheiten: #{allowed_units(unit_from)}"
         second_input = next_input
       end
       unit_to = second_input
@@ -41,12 +45,19 @@ class Interface
     end while %w[ja j].include?(next_input)
   end
 
+  # @return [bool]
   def valid_first_input?(input)
     unit = input[/^[-\d .]+(.*)/m, 1]
-    @allowed_units.include?(unit)
+    @all_units.include?(unit)
   end
 
+  # @return [bool]
   def valid_second_input?(unit_from, second_input)
-    @converter.unit_category(unit_from) == @converter.unit_category(second_input)
+    allowed_units(unit_from).include?(second_input)
+  end
+
+  # @return [Array]
+  def allowed_units(unit)
+    @converter.list_units(@converter.unit_category(unit))
   end
 end

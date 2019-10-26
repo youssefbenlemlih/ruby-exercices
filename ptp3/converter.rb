@@ -42,10 +42,16 @@ class Converter
     puts kelvin
   end
 
-  def list_units
+  # @param [String] category
+  # @return [Array]
+  def list_units(category = '')
     units = []
-    @units_config.each_value do |val|
-      val['units'].each_key { |key| units << key }
+    if category == ''
+      @units_config.each_value do |val|
+        val['units'].each_key { |key| units << key }
+      end
+    else
+      @units_config[category]['units'].each_key { |key| units << key }
     end
     units
   end
