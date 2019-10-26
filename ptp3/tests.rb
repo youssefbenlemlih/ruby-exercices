@@ -46,9 +46,11 @@ class Tests < Test::Unit::TestCase
       value2 = e[2]
       unit2 = e[3]
       # from value1 to value2
-      assert_equal(value2,@converter.convert(value1,unit1,unit2))
+      assert_equal(value2,@converter.convert(value1,unit1,unit2),
+      "line: v1=#{value1} u1=#{unit1} v2=#{value2} u2=#{unit2}")
       # from value2 to value1
-      assert_equal(value1,@converter.convert(value2,unit2,unit1))
+      assert_equal(value1,@converter.convert(value2,unit2,unit1),
+      "line: v1=#{value1} u1=#{unit1} v2=#{value2} u2=#{unit2}")
     end
   end
 end
