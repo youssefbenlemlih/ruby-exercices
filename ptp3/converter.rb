@@ -12,34 +12,9 @@ class Converter
 
   def convert(num, u1, u2)
     units = @units_config[unit_category(u1)]
-    # num * (units[u1]['factor'].to_r + units[u1]['delta']) /
-    #   (units[u2]['factor'].to_r + units[u2]['delta'])
-
-    # Funktioniert für alle Einheiten und Temperaturumrechnungen mit Fahrenheit, aber nicht für zB Kelvin zu Celsius
-    base = (num + units[u1]['delta']) * units[u1]['factor'].to_r
-    base * (1 / units[u2]['factor'].to_r) - units[u2]['delta']
-  end
-
-=begin
-  def convert(num, u1, u2)
-    units = @units_config[unit_category(u1)]['units']
-    base = if u1 == 'fahrenheit'
-             (num + units[u1]['delta']) * units[u1]['factor'].to_r
-           else
-             num * units[u1]['factor'].to_r - units[u1]['delta']
-           end
-    divisor = if u2 == 'fahrenheit'
-                (num * units[u2]['factor'].to_r) - units[u2]['delta']
-              else
-                units[u2]['factor'].to_r + units[u2]['delta']
-              end
-    base / divisor
-  end
-=end
-
-  def convert_with_formular(cat, num, u1, u2)
-    kelvin = cat[u1]['to-kelvin']
-    puts kelvin
+    result = (num + units[u1]['delta']) * units[u1]['factor'].to_r
+    result *= (1 / units[u2]['factor'].to_r) - units[u2]['delta']
+    result.to_f
   end
 
   # @param [String] category
