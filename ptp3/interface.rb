@@ -1,3 +1,5 @@
+# Author:: Youssef Benlemlih
+# Author:: Jonas Krukenberg
 require_relative 'converter'
 
 class Interface
@@ -16,16 +18,16 @@ class Interface
       puts 'Welchen Wert wollen Sie umrechnen? [Bsp:100km]'
       first_input = next_input
       until valid_first_input?(first_input)
-        puts 'Ungueltige Eingabe. Bitte erneut versuchen [Bsp:50mm]'
+        puts 'Ungueltige Eingabe. Bitte erneut versuchen [Bsp:50 mm]'
         first_input = next_input
       end
-      num = (first_input[/[\d.]+/]).to_f
+      num = (first_input[/[-\d.]+/]).to_f
       unit_from = (first_input[/[a-z]+.*/])
 
       puts 'Was ist die Zieleinheit, zu der Sie umrechnen wollen? [Bsp:mm]'
       second_input = next_input
       until valid_second_input?(unit_from, second_input)
-        puts 'Ungueltige Eingabe. Bitte erneut versuchen [Bsp:cm]'
+        puts 'Ungueltige Eingabe. Bitte erneut versuchen'
         second_input = next_input
       end
       unit_to = second_input
@@ -40,7 +42,7 @@ class Interface
   end
 
   def valid_first_input?(input)
-    unit = input[/^[\d .]+(.*)/m, 1]
+    unit = input[/^[-\d .]+(.*)/m, 1]
     @allowed_units.include?(unit)
   end
 
