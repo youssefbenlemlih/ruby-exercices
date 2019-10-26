@@ -12,8 +12,13 @@ class Converter
 
   def convert(num, u1, u2)
     units = @units_config[unit_category(u1)]
-    result = (num + units[u1]['delta']) * units[u1]['factor'].to_r
-    result *= (1 / units[u2]['factor'].to_r) - units[u2]['delta']
+    f1 = Rational(units[u1]['factor'].to_s)
+    f2 = Rational(units[u2]['factor'].to_s)
+    d1 = Rational(units[u1]['delta'].to_s)
+    d2 = Rational(units[u2]['delta'].to_s)
+    num = Rational(num.to_f.to_s)
+    result = (num + d1) * f1
+    result *= (1/f2)-d2
     result.to_f
   end
 
