@@ -25,7 +25,7 @@ class Tests < Test::Unit::TestCase
 
     @converter = Converter.new
     File.open('./test_data/converter_test_data.json') do |file|
-      @converter_data= JSON.parse(file.read.chomp)
+      @converter_data = JSON.parse(file.read.chomp)
     end
   end
 
@@ -41,7 +41,14 @@ class Tests < Test::Unit::TestCase
   def test_converter
     assert_equal('temperature', @converter.unit_category('celsius'))
     @converter_data.each do|e|
-      assert_equal(e[3],@converter.convert(e[0],e[1],e[2]))
+      value1 = e[0]
+      unit1 = e[1]
+      value2 = e[2]
+      unit2 = e[3]
+      # from value1 to value2
+      assert_equal(value2,@converter.convert(value1,unit1,unit2))
+      # from value2 to value1
+      assert_equal(value1,@converter.convert(value2,unit2,unit1))
     end
   end
 end
