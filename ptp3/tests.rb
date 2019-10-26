@@ -24,26 +24,9 @@ class Tests < Test::Unit::TestCase
     ]
 
     @converter = Converter.new
-    @converter_data=[
-      #lenght tests
-      [10,'km','m',10000],
-      [10,'m','m',10],
-      [5,'mm','cm',0.5],
-      [5,'mm','m',0.005],
-      [10,'km','m',10000],
-      # mass tests
-
-      # temperature tests
-      [0,'celsius','fahrenheit',32],
-      [-0,'celsius','fahrenheit',32],
-      [100,'celsius','fahrenheit',212],
-      [-49,'fahrenheit','celsius',-45],
-      [0.0,'celsius','kelvin',273.15],
-      [25,'celsius','kelvin',298.15],
-      [25,'celsius','kelvin',298.15],
-      [0.79,'kelvin','celsius',-272.36]
-      # old units tests
-    ]
+    File.open('./test_data/converter_test_data.json') do |file|
+      @converter_data= JSON.parse(file.read.chomp)
+    end
   end
 
   def test_interface
