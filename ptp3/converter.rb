@@ -11,7 +11,7 @@ class Converter
   end
 
   def convert(num, u1, u2)
-    units = @units_config[unit_category(u1)]['units']
+    units = @units_config[unit_category(u1)]
     # num * (units[u1]['factor'].to_r + units[u1]['delta']) /
     #   (units[u2]['factor'].to_r + units[u2]['delta'])
 
@@ -38,7 +38,7 @@ class Converter
 =end
 
   def convert_with_formular(cat, num, u1, u2)
-    kelvin = cat['units'][u1]['to-kelvin']
+    kelvin = cat[u1]['to-kelvin']
     puts kelvin
   end
 
@@ -48,17 +48,17 @@ class Converter
     units = []
     if category == ''
       @units_config.each_value do |val|
-        val['units'].each_key { |key| units << key }
+        val.each_key { |key| units << key }
       end
     else
-      @units_config[category]['units'].each_key { |key| units << key }
+      @units_config[category].each_key { |key| units << key }
     end
     units
   end
 
   def unit_category(unit)
     @units_config.each do |key, val|
-      return key if val['units'].keys.include?(unit)
+      return key if val.keys.include?(unit)
     end
     nil
   end
