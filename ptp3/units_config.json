@@ -102,9 +102,21 @@
     }
   },
   "oldunit": {
-    "dutzend": 12,
-    "mandel": 15,
-    "schock": 60,
-    "gross": 144
+    "dutzend": {
+      "factor": 12,
+      "delta": 0
+    },
+    "mandel": {
+      "factor": 15,
+      "delta": 0
+    },
+    "schock": {
+      "factor": 60,
+      "delta": 0
+    },
+    "gross": {
+      "factor": 144,
+      "delta": 0
+    }
   }
 }
