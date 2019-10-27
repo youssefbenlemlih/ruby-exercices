@@ -18,7 +18,7 @@ class Converter
     d2 = Rational(units[u2]['delta'].to_s)
     num = Rational(num.to_f.to_s)
     result = (num + d1) * f1
-    result *= (1/f2)-d2
+    result *= (1 / f2) - d2
     result.to_f
   end
 
