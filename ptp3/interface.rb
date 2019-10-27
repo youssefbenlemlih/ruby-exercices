@@ -5,6 +5,7 @@
 require_relative 'converter'
 
 class Interface
+  attr_reader :converter
   # Set up some essential attributes
   def initialize
     @converter = Converter.new
