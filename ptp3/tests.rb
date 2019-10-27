@@ -43,7 +43,7 @@ class Tests < Test::Unit::TestCase
   end
 
   def test_converter
-    @converter_data.each_value do |e|
+    @converter_data.each do |e|
       value1 = e[0]
       unit1 = e[1]
       value2 = e[2]

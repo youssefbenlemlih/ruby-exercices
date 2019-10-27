@@ -1,146 +1,146 @@
-{
-  "0": [
+[
+  [
     1,
     "m",
     1,
     "m"
   ],
-  "1": [
+  [
     10,
     "km",
     10000,
     "m"
   ],
-  "2": [
+  [
     5,
     "mm",
     0.5,
     "cm"
   ],
-  "3": [
+  [
     5,
     "mm",
     0.005,
     "m"
   ],
-  "4": [
+  [
     10,
     "km",
     10000,
     "m"
   ],
-  "5": [
+  [
     1,
     "m",
     39.370,
     "in"
   ],
-  "6": [
+  [
     1,
     "in",
     25.4,
     "mm"
   ],
-  "7": [
+  [
     10.359,
     "ft",
     3.453,
     "yd"
   ],
-  "8": [
+  [
     0,
     "celsius",
     32,
     "fahrenheit"
   ],
-  "9": [
+  [
     -0,
     "celsius",
     32,
     "fahrenheit"
   ],
-  "10": [
+  [
     100,
     "celsius",
     212,
     "fahrenheit"
   ],
-  "11": [
+  [
     -49,
     "fahrenheit",
     -45,
     "celsius"
   ],
-  "12": [
+  [
     0.0,
     "celsius",
     273.15,
     "kelvin"
   ],
-  "13": [
+  [
     25,
     "celsius",
     298.15,
     "kelvin"
   ],
-  "14": [
+  [
     25,
     "celsius",
     298.15,
     "kelvin"
   ],
-  "15": [
+  [
     0.79,
     "kelvin",
     -272.36,
     "celsius"
   ],
-  "16": [
+  [
     0,
     "smurdley",
     -273,
     "celsius"
   ],
-  "17": [
+  [
     100,
     "smurdley",
     27,
     "celsius"
   ],
-  "18": [
+  [
     177,
     "celsius",
     150,
     "smurdley"
   ],
-  "19": [
+  [
     30,
     "schock",
     120,
     "mandel"
   ],
-  "20": [
+  [
     300,
     "schock",
     1500,
     "dutzend"
   ],
-  "21": [
+  [
     60,
     "dutzend",
     5,
     "gross"
   ],
-  "22": [
+  [
     3,
     "mandel",
     4,
     "dutzend"
   ],
-  "23": [
+  [
     20,
     "schock",
     100,
     "dutzend"
   ]
-}
+]
