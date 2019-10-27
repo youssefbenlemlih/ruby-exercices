@@ -112,5 +112,35 @@
     "celsius",
     150,
     "smurdley"
+  ],
+  "19": [
+    30,
+    "schock",
+    120,
+    "mandel"
+  ],
+  "20": [
+    300,
+    "schock",
+    1500,
+    "dutzend"
+  ],
+  "21": [
+    60,
+    "dutzend",
+    5,
+    "gross"
+  ],
+  "22": [
+    3,
+    "mandel",
+    4,
+    "dutzend"
+  ],
+  "23": [
+    20,
+    "schock",
+    100,
+    "dutzend"
   ]
 }
