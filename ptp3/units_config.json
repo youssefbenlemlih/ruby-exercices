@@ -93,8 +93,9 @@
       "delta": -32
     },
     "smurdley": {
-      "factor": 1,
-      "delta": -273
+      "factor": 3,
+      "delta": -273,
+      "special": "f-d-reversed"
     },
     "kelvin": {
       "factor": 1,

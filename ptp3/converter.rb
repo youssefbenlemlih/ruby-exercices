@@ -12,13 +12,21 @@ class Converter
 
   def convert(num, u1, u2)
     units = @units_config[unit_category(u1)]
-    f1 = Rational(units[u1]['factor'].to_s)
-    f2 = Rational(units[u2]['factor'].to_s)
-    d1 = Rational(units[u1]['delta'].to_s)
-    d2 = Rational(units[u2]['delta'].to_s)
-    num = Rational(num.to_f.to_s)
-    result = (num + d1) * f1
-    result *= (1 / f2) - d2
+    num = Rational(num)
+    d1 = units[u1]['delta'].to_r
+    f1 = units[u1]['factor'].to_r
+    d2 = units[u2]['delta'].to_r
+    f2 = units[u2]['factor'].to_r
+    result = if units[u1]['special'] == 'f-d-reversed'
+               (num * f1) + d1
+             else
+               (num + d1) * f1
+             end
+    result = if units[u2]['special'] == 'f-d-reversed'
+               (result - d2) * (1 / f2)
+             else
+               result * (1 / f2) - d2
+             end
     result.to_f
   end
 

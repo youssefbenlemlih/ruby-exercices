@@ -14,6 +14,7 @@ class Interface
   end
 
   def interact
+    @converter.convert(100, 'smurdley', 'celsius')
     begin
       puts 'Welchen Wert wollen Sie umrechnen? [Bsp:100km]'
       puts "Erlaubte Einheiten: #{@all_units.to_s}"
