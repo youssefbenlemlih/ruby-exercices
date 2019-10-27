@@ -1,8 +1,11 @@
 # Author:: Youssef Benlemlih
 # Author:: Jonas Krukenberg
+# This class manages frontend interaction with the user,
+# validates inputs, outputs results
 require_relative 'converter'
 
 class Interface
+  attr_reader :converter
   def initialize
     @converter = Converter.new
     @all_units = @converter.list_units
@@ -14,7 +17,6 @@ class Interface
   end
 
   def interact
-    @converter.convert(100, 'smurdley', 'celsius')
     begin
       puts 'Welchen Wert wollen Sie umrechnen? [Bsp:100km]'
       puts "Erlaubte Einheiten: #{@all_units.to_s}"
@@ -26,13 +28,14 @@ class Interface
       end
       num = (first_input[/[-\d.]+/]).to_f
       unit_from = (first_input[/[a-z]+.*/])
+      @converter.category!(unit_from)
 
       puts 'Was ist die Zieleinheit, zu der Sie umrechnen wollen?'
-      puts "Erlaubte Einheiten: #{allowed_units(unit_from)}"
+      puts "Erlaubte Einheiten: #{allowed_units}"
       second_input = next_input
-      until valid_second_input?(unit_from, second_input)
+      until valid_second_input?(second_input)
         puts 'Ungueltige Eingabe. Bitte erneut versuchen'
-        puts "Erlaubte Einheiten: #{allowed_units(unit_from)}"
+        puts "Erlaubte Einheiten: #{allowed_units}"
         second_input = next_input
       end
       unit_to = second_input
@@ -53,12 +56,12 @@ class Interface
   end
 
   # @return [bool]
-  def valid_second_input?(unit_from, second_input)
-    allowed_units(unit_from).include?(second_input)
+  def valid_second_input?(second_input)
+    allowed_units.include?(second_input)
   end
 
   # @return [Array]
-  def allowed_units(unit)
-    @converter.list_units(@converter.unit_category(unit))
+  def allowed_units
+    @converter.list_units(true)
   end
 end

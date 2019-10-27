@@ -1,123 +1,135 @@
 {
   "length": {
-    "km": {
-      "factor": 1000.0,
-      "delta": 0
-    },
-    "in": {
-      "factor": 0.0254,
-      "delta": 0
-    },
-    "ft": {
-      "factor": 0.3048,
-      "delta": 0
-    },
-    "yd": {
-      "factor": 0.9144,
-      "delta": 0
-    },
-    "mile": {
-      "factor": 1609.34,
-      "delta": 0
-    },
-    "potrzebie": {
-      "factor": 0.002263,
-      "delta": 0
-    },
-    "mp": {
-      "factor": 0.000002263,
-      "delta": 0
-    },
-    "kp": {
-      "factor": 2.263,
-      "delta": 0
-    },
-    "fp": {
-      "factor": 2263.0,
-      "delta": 0
-    },
-    "m": {
-      "factor": 1.0,
-      "delta": 0
-    },
-    "cm": {
-      "factor": 0.01,
-      "delta": 0
-    },
-    "mm": {
-      "factor": 0.001,
-      "delta": 0
+    "precision": 3,
+    "units": {
+      "km": {
+        "factor": 1000.0,
+        "delta": 0
+      },
+      "in": {
+        "factor": 0.0254,
+        "delta": 0
+      },
+      "ft": {
+        "factor": 0.3048,
+        "delta": 0
+      },
+      "yd": {
+        "factor": 0.9144,
+        "delta": 0
+      },
+      "mile": {
+        "factor": 1609.34,
+        "delta": 0
+      },
+      "potrzebie": {
+        "factor": 0.002263,
+        "delta": 0
+      },
+      "mp": {
+        "factor": 0.000002263,
+        "delta": 0
+      },
+      "kp": {
+        "factor": 2.263,
+        "delta": 0
+      },
+      "fp": {
+        "factor": 2263.0,
+        "delta": 0
+      },
+      "m": {
+        "factor": 1.0,
+        "delta": 0
+      },
+      "cm": {
+        "factor": 0.01,
+        "delta": 0
+      },
+      "mm": {
+        "factor": 0.001,
+        "delta": 0
+      }
     }
   },
   "mass": {
-    "g": {
-      "factor": 1.0,
-      "delta": 0
-    },
-    "ngogn": {
-      "factor": 11.59,
-      "delta": 0
-    },
-    "ounce": {
-      "factor": 28.35,
-      "delta": 0
-    },
-    "blintz": {
-      "factor": 36.43,
-      "delta": 0
-    },
-    "kg": {
-      "factor": 1000,
-      "delta": 0
-    },
-    "kn": {
-      "factor": 11590.0,
-      "delta": 0
-    },
-    "t": {
-      "factor": 1000000,
-      "delta": 0
-    },
-    "zentner": {
-      "factor": 50000.0,
-      "delta": 0
+    "precision": 3,
+    "units": {
+      "g": {
+        "factor": 1.0,
+        "delta": 0
+      },
+      "ngogn": {
+        "factor": 11.59,
+        "delta": 0
+      },
+      "ounce": {
+        "factor": 28.35,
+        "delta": 0
+      },
+      "blintz": {
+        "factor": 36.43,
+        "delta": 0
+      },
+      "kg": {
+        "factor": 1000,
+        "delta": 0
+      },
+      "kn": {
+        "factor": 11590.0,
+        "delta": 0
+      },
+      "t": {
+        "factor": 1000000,
+        "delta": 0
+      },
+      "zentner": {
+        "factor": 50000.0,
+        "delta": 0
+      }
     }
   },
   "temperature": {
-    "celsius": {
-      "factor": 1,
-      "delta": 0
-    },
-    "fahrenheit": {
-      "factor": "5/9",
-      "delta": -32
-    },
-    "smurdley": {
-      "factor": 3,
-      "delta": -273,
-      "special": "f-d-reversed"
-    },
-    "kelvin": {
-      "factor": 1,
-      "delta": -273.15
+    "precision": 2,
+    "units": {
+      "celsius": {
+        "factor": 1,
+        "delta": 0
+      },
+      "fahrenheit": {
+        "factor": "5/9",
+        "delta": -32
+      },
+      "smurdley": {
+        "factor": 3,
+        "delta": -273,
+        "special": "f-d-reversed"
+      },
+      "kelvin": {
+        "factor": 1,
+        "delta": -273.15
+      }
     }
   },
   "oldunit": {
-    "dutzend": {
-      "factor": 12,
-      "delta": 0
-    },
-    "mandel": {
-      "factor": 15,
-      "delta": 0
-    },
-    "schock": {
-      "factor": 60,
-      "delta": 0
-    },
-    "gross": {
-      "factor": 144,
-      "delta": 0
+    "precision": 0,
+    "units": {
+      "dutzend": {
+        "factor": 12,
+        "delta": 0
+      },
+      "mandel": {
+        "factor": 15,
+        "delta": 0
+      },
+      "schock": {
+        "factor": 60,
+        "delta": 0
+      },
+      "gross": {
+        "factor": 144,
+        "delta": 0
+      }
     }
   }
 }

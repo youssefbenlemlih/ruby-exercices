@@ -1,6 +1,6 @@
 # Author:: Youssef Benlemlih
 # Author:: Jonas Krukenberg
+# Starts the application
 require_relative 'interface'
 
-interface = Interface.new
-interface.interact
+Interface.new.interact
