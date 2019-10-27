@@ -1,9 +1,9 @@
 # Author:: Youssef Benlemlih
 # Author:: Jonas Krukenberg
 # Class for testing the application
-require "test/unit"
-require_relative "interface"
-require_relative "converter"
+require 'test/unit'
+require_relative 'interface'
+require_relative 'converter'
 
 class Tests < Test::Unit::TestCase
   def setup
@@ -11,23 +11,23 @@ class Tests < Test::Unit::TestCase
     @converter = Converter.new
 
     @first_input_params = [
-      [true, "100m"],
-      [true, "100km"],
-      [true, "10.03kg"],
-      [true, "100 m"],
-      [false, "g100m"],
-      [true, ".3m"],
-      [false, "m"],
+      [true, '100m'],
+      [true, '100km'],
+      [true, '10.03kg'],
+      [true, '100 m'],
+      [false, 'g100m'],
+      [true, '.3m'],
+      [false, 'm'],
     ]
     @second_input_params = [
-      [true, "kg", "t"],
-      [true, "mm", "ft"],
-      [false, "mm", "kg"],
-      [false, "mm", "1"],
-      [false, "kg", "g t"],
+      [true, 'kg', 't'],
+      [true, 'mm', 'ft'],
+      [false, 'mm', 'kg'],
+      [false, 'mm', '1'],
+      [false, 'kg', 'g t'],
     ]
 
-    File.open("./test_data/converter_test_data.json") do |file|
+    File.open('./test_data/converter_test_data.json') do |file|
       @converter_data = JSON.parse(file.read.chomp)
     end
   end
