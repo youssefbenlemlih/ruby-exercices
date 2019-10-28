@@ -10,17 +10,15 @@ class CodeMaker
   end
 
   def evaluate(code)
-    @hits = {:white => 0, :black => 0}
+    hits = {:white => 0, :black => 0}
     code.each_with_index do |bit, i|
-      @hits[:black] += 1 if black_hit?(bit, i)
+      hits[:black] += 1 if black_hit?(bit, i)
     end
     code.uniq.each_with_index do |bit, i|
-      @hits[:white] += 1 if white_hit?(bit, i)
+      hits[:white] += 1 if white_hit?(bit, i)
     end
     hits
   end
-
-  private
 
   def white_hit?(bit, pos)
     if !black_hit?(bit, pos)
