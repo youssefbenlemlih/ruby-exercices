@@ -15,5 +15,6 @@ class TestMastermind < Test::Unit::TestCase
     assert_equal(false, @codemaker.white_hit?(5, 1))
     assert_equal(true, @codemaker.black_hit?(2, 1))
     assert_equal(false, @codemaker.black_hit?(1, 1))
+    assert_raise(ArgumentError,@codemaker.validate_code([5]))
   end
 end

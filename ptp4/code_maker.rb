@@ -1,18 +1,16 @@
 class CodeMaker
-  def initialize
-    @symbol_count = 6
-    @code_length = 4
+  def initialize(symbol_count,code_length)
+    @symbol_count = symbol_count
+    @code_length = code_length
     @master_code = []
   end
 
   def master_code!(code)
-    validate_code(code)
     @master_code = code
     nil
   end
 
   def evaluate(code)
-    validate_code(code)
     hits = {:white => 0, :black => 0}
     code.each_with_index do |bit, i|
       hits[:black] += 1 if black_hit?(bit, i)
@@ -23,15 +21,14 @@ class CodeMaker
     hits
   end
 
-  def validate_code(code)
-    raise ArgumentError, "Der code besteht nicht aus #{@code_length} Symbolen" if code.length != @code_length
-    contains_forbidden = false
+  def code_feedback(code)
+    return "Der code besteht nicht aus #{@code_length} Symbolen" if code.length != @code_length
     code.each do |e|
       if e < 1 || e > @symbol_count
-        contains_forbidden = true
+        return "Der code beinhaltet unzulässige Symbole"
       end
     end
-    raise ArgumentError, "Der code beinhaltet unzulässige Symbole" if contains_forbidden
+    nil
   end
 
   def white_hit?(bit, pos)
