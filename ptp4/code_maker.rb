@@ -7,19 +7,14 @@ class CodeMaker
   end
 
   def input_code
+    code = []
     if @human
-      print 'Bitte die Geheimkombination eingeben'
-      code = []
+      print 'Bitte die Geheimkombination eingeben:'
       gets.chomp.split('').each { |e| code << e.to_i }
-      code
     else
-      generate_mastercode
+      puts 'Geheimkombination wird generiert...'
+      @code_length.times { code << rand(1..@symbol_count) }
     end
-  end
-
-  def generate_mastercode
-    @code_length.times { @master_code << rand(1..@symbol_count) }
-    code = @master_code
     code
   end
 
