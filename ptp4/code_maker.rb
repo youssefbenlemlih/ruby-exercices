@@ -23,18 +23,6 @@ class CodeMaker
     nil
   end
 
-  # @return [Hash] white => x, black => y
-  def evaluate(code)
-    hits = {:white => 0, :black => 0}
-    code.each_with_index do |bit, i|
-      hits[:black] += 1 if black_hit?(bit, i)
-    end
-    code.uniq.each_with_index do |bit, i|
-      hits[:white] += 1 if white_hit?(bit, i)
-    end
-    hits
-  end
-
   def invalid_code_msg(code)
     return "Der Code besteht nicht aus #{@code_length} Symbolen" if code.length != @code_length
 
@@ -46,12 +34,34 @@ class CodeMaker
     nil
   end
 
-  def white_hit?(bit, pos)
-    if !black_hit?(bit, pos)
-      @master_code.include?(bit)
-    else
-      false
+  # @return [Hash] white => x, black => y
+  def evaluate(code)
+    hits = {white: 0, black: 0}
+    locked = []
+    code.each_with_index do |bit, pos|
+      if black_hit?(bit, pos)
+        hits[:black] += 1
+        locked << pos
+      end
     end
+    code.each_with_index do |bit, pos|
+      white_pos = white_hit_pos(code, bit, pos)
+      if !white_pos.empty? && !(white_pos.all? { |wp| locked.include?(wp) })
+        hits[:white] += 1
+        locked << white_pos
+      end
+    end
+    hits
+  end
+
+  def white_hit_pos(code, bit, pos)
+    white_pos = []
+    unless black_hit?(bit, pos)
+      @master_code.each_with_index do |val, i|
+        white_pos << i if val == bit && !black_hit?(code[i], i)
+      end
+    end
+    white_pos
   end
 
   def black_hit?(bit, pos)
