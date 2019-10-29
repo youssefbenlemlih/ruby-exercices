@@ -12,13 +12,20 @@ class Mastermind
 
   def start
     @code_maker.master_code!(new_code(@code_maker))
-    @rounds.times do |round|
+    round = 0
+    begin
       puts "\n#{round + 1}. Versuch"
       code = new_code(@code_breaker)
       hits = @code_maker.evaluate(code)
       @code_breaker.log(code, hits)
       @code_breaker.print_log
-    end
+      round += 1
+    end while round <= @rounds && hits[:black] != 4
+    stop
+  end
+
+  def stop
+    puts 'Das Spiel wurde beendet. Auswertung folgt...'
   end
 
   def new_code(person)
