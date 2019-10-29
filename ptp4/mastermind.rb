@@ -2,28 +2,35 @@ require_relative 'code_breaker'
 require_relative 'code_maker'
 
 class Mastermind
-  def initialize
-    @symbol_count = 6
-    @code_length = 4
+  def initialize(symbol_count, code_length, rounds)
+    @symbol_count = symbol_count
+    @code_length = code_length
     @code_maker = CodeMaker.new(@symbol_count, @code_length)
     @code_breaker = CodeBreaker.new
-    @rounds = 10
+    @rounds = rounds
   end
 
   def start
-
-    @rounds.times do
-      puts @code_breaker.input_code
-      puts @code_breaker.hits([1, 5, 6])
+    @code_maker.master_code!(new_code(@code_maker))
+    @rounds.times do |round|
+      puts "\n#{round + 1}. Versuch"
+      code = new_code(@code_breaker)
+      hits = @code_maker.evaluate(code)
+      @code_breaker.log(code, hits)
+      @code_breaker.print_log
     end
   end
 
-  def demand_mastercode
-    puts 'Bitte die Geheimkombination eingeben'
-    begin
-      code = []
-      gets.split.each { |e| code << e.to_i }
-    end until @code_maker.code_feedback(code).nil?
-    @code_maker.master_code!(code)
+  def new_code(person)
+    code = []
+    loop do
+      code = person.input_code
+      inval_code = @code_maker.invalid_code_msg(code)
+      break if inval_code.nil?
+
+      puts inval_code
+    end
+    code
   end
+
 end

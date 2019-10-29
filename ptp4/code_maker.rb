@@ -1,8 +1,26 @@
 class CodeMaker
-  def initialize(symbol_count,code_length)
+  def initialize(symbol_count, code_length)
     @symbol_count = symbol_count
     @code_length = code_length
     @master_code = []
+    @human = true
+  end
+
+  def input_code
+    if @human
+      print 'Bitte die Geheimkombination eingeben'
+      code = []
+      gets.chomp.split('').each { |e| code << e.to_i }
+      code
+    else
+      generate_mastercode
+    end
+  end
+
+  def generate_mastercode
+    @code_length.times { @master_code << rand(1..@symbol_count) }
+    code = @master_code
+    code
   end
 
   def master_code!(code)
@@ -10,6 +28,7 @@ class CodeMaker
     nil
   end
 
+  # @return [Hash] white => x, black => y
   def evaluate(code)
     hits = {:white => 0, :black => 0}
     code.each_with_index do |bit, i|
@@ -21,11 +40,12 @@ class CodeMaker
     hits
   end
 
-  def code_feedback(code)
-    return "Der code besteht nicht aus #{@code_length} Symbolen" if code.length != @code_length
+  def invalid_code_msg(code)
+    return "Der Code besteht nicht aus #{@code_length} Symbolen" if code.length != @code_length
+
     code.each do |e|
       if e < 1 || e > @symbol_count
-        return "Der code beinhaltet unzulässige Symbole"
+        return 'Der Code beinhaltet unerlaubte Symbole'
       end
     end
     nil
