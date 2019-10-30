@@ -36,6 +36,7 @@ class CodeMaker
 
   # @return [Hash] white => x, black => y
   def evaluate(code)
+    puts "\n #{@master_code}"
     hits = {white: 0, black: 0}
     locked = []
     code.each_with_index do |bit, pos|
@@ -48,8 +49,9 @@ class CodeMaker
       white_pos = white_hit_pos(code, bit, pos)
       if !white_pos.empty? && !(white_pos.all? { |wp| locked.include?(wp) })
         hits[:white] += 1
-        locked << white_pos
+        locked.concat(white_pos)
       end
+      puts "#{bit}: white=#{hits[:white]} #{locked}"
     end
     hits
   end

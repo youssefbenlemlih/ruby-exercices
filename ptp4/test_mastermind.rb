@@ -3,7 +3,7 @@ require_relative 'code_maker'
 
 class TestMastermind < Test::Unit::TestCase
   def setup
-    @codemaker = CodeMaker.new(6,4)
+    @codemaker = CodeMaker.new(6, 4)
   end
 
   def test_codemaker
@@ -11,6 +11,8 @@ class TestMastermind < Test::Unit::TestCase
     assert_equal({white: 4, black: 0}, @codemaker.evaluate([2, 3, 4, 1]))
     assert_equal({white: 0, black: 1}, @codemaker.evaluate([1, 1, 1, 1]))
     assert_equal({white: 1, black: 1}, @codemaker.evaluate([1, 4, 6, 1]))
+    assert_equal({white: 1, black: 1}, @codemaker.evaluate([2, 2, 2, 1]))
+    assert_equal({white: 0, black: 2}, @codemaker.evaluate([1, 2, 2, 1]))
     code_tip = [2, 2, 2, 1]
     assert_equal([0], @codemaker.white_hit_pos(code_tip, 1, 3))
     assert_equal([], @codemaker.white_hit_pos(code_tip, 5, 0))
@@ -18,6 +20,8 @@ class TestMastermind < Test::Unit::TestCase
     assert_equal(false, @codemaker.black_hit?(1, 1))
     @codemaker.master_code!([1, 1, 2, 2])
     assert_equal({white: 1, black: 1}, @codemaker.evaluate([1, 5, 5, 1]))
-    assert_equal({white: 2, black: 0}, @codemaker.evaluate([2, 2, 5, 5]))
+    assert_equal({white: 1, black: 1}, @codemaker.evaluate([2, 2, 2, 5]))
+    assert_equal({white: 0, black: 4}, @codemaker.evaluate([1, 1, 2, 2]))
+    assert_equal({white: 0, black: 3}, @codemaker.evaluate([1, 2, 2, 2]))
   end
 end
