@@ -3,14 +3,18 @@ class CodeMaker
     @symbol_count = symbol_count
     @code_length = code_length
     @master_code = []
-    @human = true
+    @human = false
+  end
+
+  def unveil
+    puts "Der Code war #{@master_code}"
   end
 
   def input_code
     code = []
     if @human
       print 'Bitte die Geheimkombination eingeben:'
-      gets.chomp.split('').each { |e| code << e.to_i }
+      gets.chomp.split(/ ?/).each { |e| code << e.to_i }
     else
       puts 'Geheimkombination wird generiert...'
       @code_length.times { code << rand(1..@symbol_count) }
@@ -36,7 +40,6 @@ class CodeMaker
 
   # @return [Hash] white => x, black => y
   def evaluate(code)
-    puts "\n #{@master_code}"
     hits = {white: 0, black: 0}
     locked = []
     code.each_with_index do |bit, pos|
@@ -51,7 +54,6 @@ class CodeMaker
         hits[:white] += 1
         locked.concat(white_pos)
       end
-      puts "#{bit}: white=#{hits[:white]} #{locked}"
     end
     hits
   end
