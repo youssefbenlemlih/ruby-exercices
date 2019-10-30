@@ -1,9 +1,9 @@
 class CodeMaker
-  def initialize(symbol_count, code_length)
+  def initialize(symbol_count, code_length, is_human)
     @symbol_count = symbol_count
     @code_length = code_length
     @master_code = []
-    @human = false
+    @human = is_human
   end
 
   def unveil
