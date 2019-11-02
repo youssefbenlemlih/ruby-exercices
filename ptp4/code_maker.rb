@@ -27,6 +27,7 @@ class CodeMaker
     nil
   end
 
+  # @return [String,NilClass] String if invalid code, nil if the code is valid
   def invalid_code_msg(code)
     return "Der Code besteht nicht aus #{@code_length} Symbolen" if code.length != @code_length
 
@@ -40,34 +41,30 @@ class CodeMaker
 
   # @return [Hash] white => x, black => y
   def evaluate(code)
-    hits = {white: 0, black: 0}
-    locked = []
+    hits = {white: white_hits(code), black: 0}
     code.each_with_index do |bit, pos|
-      if black_hit?(bit, pos)
-        hits[:black] += 1
-        locked << pos
-      end
-    end
-    code.each_with_index do |bit, pos|
-      white_pos = white_hit_pos(code, bit, pos)
-      if !white_pos.empty? && !(white_pos.all? { |wp| locked.include?(wp) })
-        hits[:white] += 1
-        locked.concat(white_pos)
-      end
+      hits[:black] += 1 if black_hit?(bit, pos)
     end
     hits
   end
 
-  def white_hit_pos(code, bit, pos)
-    white_pos = []
-    unless black_hit?(bit, pos)
-      @master_code.each_with_index do |val, i|
-        white_pos << i if val == bit && !black_hit?(code[i], i)
-      end
+  # @return [Integer] Count of white hits
+  def white_hits(code)
+    hits = 0
+    # Make a copy of master_code to be able to remove all black hits
+    master_copy = []
+    @master_code.each_with_index { |bit, i| master_copy[i] = black_hit?(code[i], i) ? nil : bit }
+    code.each_with_index do |bit, i|
+      next unless (mindex = master_copy.index(bit)) && !black_hit?(bit, i)
+
+      # Remove bit at mindex so it won't be found again
+      master_copy[mindex] = nil
+      hits += 1
     end
-    white_pos
+    hits
   end
 
+  # @return [Boolean]
   def black_hit?(bit, pos)
     @master_code[pos] == bit
   end
