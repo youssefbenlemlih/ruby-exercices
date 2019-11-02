@@ -5,7 +5,7 @@ class Mastermind
   def initialize(symbol_count, code_length, rounds)
     @symbol_count = symbol_count
     @code_length = code_length
-    @code_maker = CodeMaker.new(@symbol_count, @code_length, true)
+    @code_maker = CodeMaker.new(@symbol_count, @code_length, false)
     @code_breaker = CodeBreaker.new(@symbol_count, @code_length, false)
     @rounds = rounds
   end
