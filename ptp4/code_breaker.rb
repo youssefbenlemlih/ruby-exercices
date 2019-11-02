@@ -7,6 +7,7 @@ class CodeBreaker
     @code = []
     @excl_symbols = []
     @possible_codes = (1..@symbol_count).to_a.repeated_permutation(@code_length).to_a
+    @all_codes = @possible_codes
   end
 
   def input_code
@@ -17,7 +18,7 @@ class CodeBreaker
       @code = code
     else
       puts 'Ich denke...'
-      sleep(1)
+      sleep(0.5)
       @code = generate
     end
   end
@@ -58,38 +59,48 @@ class CodeBreaker
       # delete last code guess from possible_codes
       @possible_codes.delete_if { |code| code == @log.last[:code] }
       s = possible_codes(@log.last[:code], @log.last[:hits][:black], @log.last[:hits][:white])
-
-      return s[rand(0..s.length)]
+      @possible_codes.delete_if { |code| !s.include?(code) }
+      return minmax_algo
+      # return s[rand(0..s.length)]
     end
   end
 
   def possible_codes(guess, black, white)
     @possible_codes.select do |code|
       white_hits(guess, code) == white &&
-        black_hits(guess, code) == black
+          black_hits(guess, code) == black
     end
   end
 
   def minmax_algo
     all_answers = list_all_answers
-    poss_count = @possible_codes.length
-    @possible_codes.each do |code|
+    codes_count = @all_codes.length
+    max_delcount = {}
+    @all_codes.each do |code|
       delcount = []
       all_answers.each_with_index do |ans, i|
-        delcount[i] = poss_count - possible_codes(code, ans[0], ans[1]).length
+        # count of codes that would be deleted with the current answer (black/white)
+        delcount[i] = codes_count - possible_codes(code, ans[0], ans[1]).length
       end
+      # store maximum delcount for each possible code
+      max_delcount[code] = delcount.max
     end
+    minmax_delcount = 10000
+    max_delcount.each do |code, count|
+      minmax_delcount = count if minmax_delcount > count
+    end
+    !max_delcount.key(minmax_delcount).nil? ? max_delcount.key(minmax_delcount) : [1, 1, 1, 1]
     # unfinished...
   end
 
   def list_all_answers
     # [black, white]
     [
-      [0, 0], [0, 1], [0, 2], [0, 3], [0, 4],
-      [1, 0], [1, 1], [1, 2], [1, 3],
-      [2, 0], [2, 1], [2, 2],
-      [3, 0],
-      [4, 0]
+        [0, 0], [0, 1], [0, 2], [0, 3], [0, 4],
+        [1, 0], [1, 1], [1, 2], [1, 3],
+        [2, 0], [2, 1], [2, 2],
+        [3, 0],
+        [4, 0]
     ]
   end
 

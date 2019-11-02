@@ -2,18 +2,21 @@ require_relative 'code_breaker'
 require_relative 'code_maker'
 
 class Mastermind
+  attr_reader :rounds_for_test
   def initialize(symbol_count, code_length, rounds)
     @symbol_count = symbol_count
     @code_length = code_length
     @code_maker = CodeMaker.new(@symbol_count, @code_length, false)
     @code_breaker = CodeBreaker.new(@symbol_count, @code_length, false)
     @rounds = rounds
+    @rounds_for_test = 0
   end
 
   def start
     @code_maker.master_code!(new_code(@code_maker))
     hits = Hash.new
     @rounds.times do |round|
+      @rounds_for_test += 1
       puts "\n#{round + 1}. Versuch"
       code = new_code(@code_breaker)
       hits = @code_maker.evaluate(code)

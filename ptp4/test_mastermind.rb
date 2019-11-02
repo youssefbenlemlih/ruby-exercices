@@ -1,5 +1,6 @@
 require 'test/unit'
 require_relative 'code_maker'
+require_relative 'mastermind'
 
 class TestMastermind < Test::Unit::TestCase
   def setup
@@ -21,5 +22,16 @@ class TestMastermind < Test::Unit::TestCase
     assert_equal({white: 1, black: 1}, @codemaker.evaluate([2, 2, 2, 5]))
     assert_equal({white: 0, black: 4}, @codemaker.evaluate([1, 1, 2, 2]))
     assert_equal({white: 0, black: 3}, @codemaker.evaluate([1, 2, 2, 2]))
+  end
+
+  def test_codebreaker
+    guesses = 0
+    repeat = 10
+    repeat.times do
+      @mastermind = Mastermind.new(6, 4, 10)
+      @mastermind.start
+      guesses += @mastermind.rounds_for_test
+    end
+    puts "Durchschnittlich benötigte Versuche: #{1.0 * guesses / repeat}"
   end
 end
