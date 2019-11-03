@@ -1,8 +1,11 @@
+# Author:: Youssef Benlemlih
+# Author:: Jonas Krukenberg
 class CodeEvaluator
   def initialize
     @master_code = []
   end
 
+  # Converts the given code to the given mastercode
   # @return [Hash] white => x, black => y
   def evaluate(mastercode, code)
     @master_code = mastercode
@@ -38,7 +41,7 @@ class CodeEvaluator
     hits
   end
 
-  # @return [Boolean]
+  # @return [Boolean] whether the code has a black hit at the given position
   def black_hit?(bit, pos)
     @master_code[pos] == bit
   end

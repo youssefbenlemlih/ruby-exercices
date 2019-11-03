@@ -4,7 +4,7 @@ require_relative 'code_evaluator'
 
 # The CodeBreaker tries to guess the code
 # in bot-mode, it makes use of the five-try-algorithm of Donald Knuth
-# explanation reference: https://github.com/nattydredd/Mastermind-Five-Guess-Algorithm
+# explanation reference: https://github.com/nattydredd/Mastermind-Five-Guess-Algorithm/blob/master/README.md
 class CodeBreaker
   attr_reader :human
 
@@ -14,12 +14,13 @@ class CodeBreaker
     @human = is_human
     @log = []
     @code = []
-    @excl_symbols = []
     @possible_codes = (1..@symbol_count).to_a.repeated_permutation(@code_length).to_a
     @all_codes = @possible_codes
     @evaluator = CodeEvaluator.new
   end
 
+  # Returns a code guess
+  # if @human will ask the user otherwise will use the five guess algorithm
   def input_code
     if @human
       print 'Bitte gib deinen Tipp ab:'
@@ -33,11 +34,13 @@ class CodeBreaker
     end
   end
 
+  # adds the new hits to the log
   def new_hits(hits)
     @log << {code: @code, hits: hits}
     nil
   end
 
+  # Generates a code guess based on the five guess algorithm
   def generate
     if @log.empty?
       # First try
@@ -52,6 +55,7 @@ class CodeBreaker
     end
   end
 
+  # returns an array containing all possible that have the same evaluation as the guess_master
   def possible_codes(guess_master, black, white)
     @possible_codes.select do |code|
       hits = @evaluator.evaluate(guess_master, code)
@@ -59,6 +63,7 @@ class CodeBreaker
     end
   end
 
+  # the Min-Max-Algorithm
   def minmax_algo
     all_answers = list_all_answers
     codes_count = @all_codes.length
@@ -76,33 +81,30 @@ class CodeBreaker
     !max_delcount.key(minmax_delcount).nil? ? max_delcount.key(minmax_delcount) : two_symbol_code(@code_length)
   end
 
+  # all possible black and white combinations
   def list_all_answers
     # [black, white]
-    [
-        [0, 0], [0, 1], [0, 2], [0, 3], [0, 4],
-        [1, 0], [1, 1], [1, 2], [1, 3],
-        [2, 0], [2, 1], [2, 2],
-        [3, 0],
-        [4, 0]
-    ]
+    answers = []
+    (@code_length + 1).times do |b|
+      (@code_length + 1).times do |w|
+        answers << [b, w] if (b + w <= @code_length && !(w == 1 && b == (@code_length - 1)))
+      end
+    end
+    answers
   end
 
+  # returns a code where the first half of elements are the same symbol as well as the second half
   def two_symbol_code(count)
     code = []
     count1 = count / 2
     count2 = count.even? ? count / 2 : count / 2 + 1
-    s1 = pick_symbol
+    s1 = rand(1..@symbol_count)
     begin
-      s2 = pick_symbol
+      s2 = rand(1..@symbol_count)
     end until s1 != s2
     count1.times { code << s1 }
     count2.times { code << s2 }
     code
-  end
-
-  def pick_symbol
-    symbols = (1..@symbol_count).find_all { |e| !@excl_symbols.include?(e) }
-    symbols[rand(0...symbols.length)]
   end
 
 end

@@ -1,10 +1,11 @@
 # Author:: Youssef Benlemlih
 # Author:: Jonas Krukenberg
 require_relative 'code_evaluator'
-
+# represents a Codemaker in th Game Mastermind
 class CodeMaker
   attr_reader :human
 
+  # Recieves the Game config parameters
   def initialize(symbol_count, code_length, is_human)
     @symbol_count = symbol_count
     @code_length = code_length
@@ -13,14 +14,18 @@ class CodeMaker
     @evaluator = CodeEvaluator.new
   end
 
+  # gives an evaluation (black and white hits) to the given code
   def evaluate(guess)
     @evaluator.evaluate(@master_code, guess)
   end
 
+  # Reviels the code (console output)
   def unveil
     puts "Der Code war #{@master_code}"
   end
 
+  # Returns a code
+  # Asks the user if not human otherwise generates a random combination
   def input_code
     code = []
     if @human
@@ -34,6 +39,7 @@ class CodeMaker
     code
   end
 
+  # sets the mastercode
   def master_code!(code)
     @master_code = code
     nil

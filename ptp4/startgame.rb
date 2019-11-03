@@ -3,6 +3,7 @@
 require_relative 'mastermind'
 require 'json'
 
+# the game configuration
 config = {}
 File.open('game_config.json') do |file|
   config = JSON.parse(file.read.chomp)
@@ -25,4 +26,3 @@ begin
   game.start
   puts 'Nochmal spielen?'
 end while %w[j ja].include?(gets.chomp.downcase)
-
