@@ -1,4 +1,13 @@
+# Author:: Youssef Benlemlih
+# Author:: Jonas Krukenberg
+require_relative 'code_evaluator'
+
+# The CodeBreaker tries to guess the code
+# in bot-mode, it makes use of the five-try-algorithm of Donald Knuth
+# explanation reference: https://github.com/nattydredd/Mastermind-Five-Guess-Algorithm
 class CodeBreaker
+  attr_reader :human
+
   def initialize(symbol_count, code_length, is_human)
     @symbol_count = symbol_count
     @code_length = code_length
@@ -8,6 +17,7 @@ class CodeBreaker
     @excl_symbols = []
     @possible_codes = (1..@symbol_count).to_a.repeated_permutation(@code_length).to_a
     @all_codes = @possible_codes
+    @evaluator = CodeEvaluator.new
   end
 
   def input_code
@@ -24,51 +34,28 @@ class CodeBreaker
   end
 
   def new_hits(hits)
-    log(hits)
-    print_log
-  end
-
-  def log(hits)
     @log << {code: @code, hits: hits}
     nil
-  end
-
-  def print_log
-    puts 'Nr | --- Codes --- | white hit | black hit |'
-    @log.each_with_index do |row, i|
-      code = row[:code].join(' | ')
-      puts sprintf('%02d | %s |     %d     |     %d     |', i + 1, code, row[:hits][:white], row[:hits][:black])
-    end
-  end
-
-  def generate
-    puts @excl_symbols.to_s
-
-    if @log.empty? || (@log.last[:hits][:white] == 0 && @log.last[:hits][:black] == 0)
-      @excl_symbols.concat(@log.last[:code].uniq) unless @log.empty?
-      return two_symbol_code(@code_length / 2, @code_length / 2)
-    end
-    (1..@code_length).map { pick_symbol }
   end
 
   def generate
     if @log.empty?
       # First try
-      return two_symbol_code(@code_length / 2, @code_length / 2)
+      two_symbol_code(@code_length)
     else
       # delete last code guess from possible_codes
       @possible_codes.delete_if { |code| code == @log.last[:code] }
       s = possible_codes(@log.last[:code], @log.last[:hits][:black], @log.last[:hits][:white])
+      # remove all codes that would not give the same response if the last code guess weren't the mastercode
       @possible_codes.delete_if { |code| !s.include?(code) }
-      return minmax_algo
-      # return s[rand(0..s.length)]
+      minmax_algo
     end
   end
 
-  def possible_codes(guess, black, white)
+  def possible_codes(guess_master, black, white)
     @possible_codes.select do |code|
-      white_hits(guess, code) == white &&
-          black_hits(guess, code) == black
+      hits = @evaluator.evaluate(guess_master, code)
+      hits[:white] == white && hits[:black] == black
     end
   end
 
@@ -85,12 +72,8 @@ class CodeBreaker
       # store maximum delcount for each possible code
       max_delcount[code] = delcount.max
     end
-    minmax_delcount = 10000
-    max_delcount.each do |code, count|
-      minmax_delcount = count if minmax_delcount > count
-    end
-    !max_delcount.key(minmax_delcount).nil? ? max_delcount.key(minmax_delcount) : [1, 1, 1, 1]
-    # unfinished...
+    minmax_delcount = max_delcount.values.min
+    !max_delcount.key(minmax_delcount).nil? ? max_delcount.key(minmax_delcount) : two_symbol_code(@code_length)
   end
 
   def list_all_answers
@@ -104,8 +87,10 @@ class CodeBreaker
     ]
   end
 
-  def two_symbol_code(count1, count2)
+  def two_symbol_code(count)
     code = []
+    count1 = count / 2
+    count2 = count.even? ? count / 2 : count / 2 + 1
     s1 = pick_symbol
     begin
       s2 = pick_symbol
@@ -120,35 +105,4 @@ class CodeBreaker
     symbols[rand(0...symbols.length)]
   end
 
-  # @return [Integer] Count of white hits
-  def white_hits(mastercode, code)
-    hits = 0
-    # Make a copy of master_code to be able to remove all black hits
-    master_copy = []
-    mastercode.each_with_index { |bit, i| master_copy[i] = black_hit?(mastercode, code[i], i) ? nil : bit }
-    code.each_with_index do |bit, i|
-      next unless (mindex = master_copy.index(bit)) && !black_hit?(mastercode, bit, i)
-
-      # Remove bit at mindex so it won't be found again
-      master_copy[mindex] = nil
-      hits += 1
-    end
-    hits
-  end
-
-  # @return [Integer]
-  def black_hits(mastercode, code)
-    hits = 0
-    code.each_with_index do |bit, i|
-      hits += 1 if mastercode[i] == bit
-    end
-    hits
-  end
-
-  # @return [Boolean]
-  def black_hit?(mastercode, bit, pos)
-    mastercode[pos] == bit
-  end
-
-  private
 end

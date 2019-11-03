@@ -1,9 +1,20 @@
+# Author:: Youssef Benlemlih
+# Author:: Jonas Krukenberg
+require_relative 'code_evaluator'
+
 class CodeMaker
+  attr_reader :human
+
   def initialize(symbol_count, code_length, is_human)
     @symbol_count = symbol_count
     @code_length = code_length
     @master_code = []
     @human = is_human
+    @evaluator = CodeEvaluator.new
+  end
+
+  def evaluate(guess)
+    @evaluator.evaluate(@master_code, guess)
   end
 
   def unveil
@@ -15,6 +26,7 @@ class CodeMaker
     if @human
       print 'Bitte die Geheimkombination eingeben:'
       gets.chomp.split(/ ?/).each { |e| code << e.to_i }
+      50.times { puts "\n" }
     else
       puts 'Geheimkombination wird generiert...'
       @code_length.times { code << rand(1..@symbol_count) }
@@ -39,33 +51,4 @@ class CodeMaker
     nil
   end
 
-  # @return [Hash] white => x, black => y
-  def evaluate(code)
-    hits = {white: white_hits(code), black: 0}
-    code.each_with_index do |bit, pos|
-      hits[:black] += 1 if black_hit?(bit, pos)
-    end
-    hits
-  end
-
-  # @return [Integer] Count of white hits
-  def white_hits(code)
-    hits = 0
-    # Make a copy of master_code to be able to remove all black hits
-    master_copy = []
-    @master_code.each_with_index { |bit, i| master_copy[i] = black_hit?(code[i], i) ? nil : bit }
-    code.each_with_index do |bit, i|
-      next unless (mindex = master_copy.index(bit)) && !black_hit?(bit, i)
-
-      # Remove bit at mindex so it won't be found again
-      master_copy[mindex] = nil
-      hits += 1
-    end
-    hits
-  end
-
-  # @return [Boolean]
-  def black_hit?(bit, pos)
-    @master_code[pos] == bit
-  end
 end
