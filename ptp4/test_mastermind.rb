@@ -35,7 +35,7 @@ class TestMastermind < Test::Unit::TestCase
         'codemaker_is_human' => false,
         'codebreaker_is_human' => false
     }
-    10.times do
+    repeat.times do
       @mastermind = Mastermind.new(config)
       @mastermind.start
       guesses += @mastermind.rounds_for_test
