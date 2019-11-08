@@ -1,3 +1,8 @@
+require_relative 'queue_error'
+
+class QueueError < StandardError
+end
+
 class Queue
   attr_reader :content
   protected :content
@@ -6,13 +11,13 @@ class Queue
   end
 
   def enqueue(elem)
-    raise('enqueue: Das ist eine Exception') if elem.nil?
+    raise(QueueError, 'You cannot add nil to this Queue!') if elem.nil?
 
     @content << elem
   end
 
   def dequeue
-    raise('dequeue: Das ist eine Exception') if empty?
+    raise(QueueError, 'The Queue is empty, you cannot dequeue anything of it!') if empty?
 
     @content.shift
   end
@@ -25,5 +30,13 @@ class Queue
     return false if self.class != other.class
 
     @content == other.content
+  end
+
+  def eql?(other)
+    self.== other
+  end
+
+  def to_s
+    @content.to_s
   end
 end
