@@ -1,5 +1,5 @@
-require 'test/unit'
-require_relative 'Queue'
+require "test/unit"
+require_relative "stack"
 
 class TestStack < Test::Unit::TestCase
   def setup
@@ -8,6 +8,5 @@ class TestStack < Test::Unit::TestCase
   end
 
   def test
-
   end
 end

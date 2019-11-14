@@ -1,5 +1,5 @@
-require 'test/unit'
-require_relative 'Queue'
+require "test/unit"
+require_relative "queue"
 
 class TestQueue < Test::Unit::TestCase
   def setup
