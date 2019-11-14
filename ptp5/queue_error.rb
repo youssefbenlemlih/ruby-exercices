@@ -1,0 +1,2 @@
+class QueueError < StandardError
+end

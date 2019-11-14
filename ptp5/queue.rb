@@ -1,23 +1,22 @@
-require_relative 'queue_error'
-
-class QueueError < StandardError
-end
+require_relative "queue_error"
 
 class Queue
   attr_reader :content
   protected :content
+
   def initialize
     @content = []
   end
 
   def enqueue(elem)
-    raise(QueueError, 'You cannot add nil to this Queue!') if elem.nil?
+    raise(QueueError, "You cannot add nil to this Queue!") if elem.nil?
 
     @content << elem
+    elem
   end
 
   def dequeue
-    raise(QueueError, 'The Queue is empty, you cannot dequeue anything of it!') if empty?
+    raise(QueueError, "The Queue is empty, you cannot dequeue anything of it!") if empty?
 
     @content.shift
   end
