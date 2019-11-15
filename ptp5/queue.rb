@@ -17,6 +17,10 @@ class Queue
     elem
   end
 
+  def <<(elem)
+    enqueue(elem)
+  end
+
   def dequeue
     raise(QueueDequeueError, 'The Queue is empty, you cannot dequeue anything of it!') if empty?
 

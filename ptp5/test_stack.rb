@@ -10,14 +10,15 @@ class TestStack < Test::Unit::TestCase
   end
 
   def test_push
-    assert(@s1.push(9))
+    assert_nothing_raised { @s1.push(9) }
     assert_raise(StackPushError) { @s1.push(nil) }
+    assert(@s1 << 10)
   end
 
   def test_pop
     assert_raise(StackPopError) { @s1.pop }
     @s1.push(5)
-    assert_equal(5, @s1.pop)
+    assert_nothing_raised { @s1.pop }
   end
 
   def test_empty

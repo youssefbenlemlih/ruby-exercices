@@ -1,7 +1,7 @@
 # Author:: Youssef Benlemlih
 # Author:: Jonas Krukenberg
-require_relative "queue"
-require_relative "stack"
+require_relative 'queue'
+require_relative 'stack'
 
 q1 = Queue.new
 q2 = Queue.new
@@ -11,13 +11,13 @@ s2 = Stack.new
 begin
   puts "q1.empty? #=> #{q1.empty?} (expected: true)"
 
-  q1.enqueue("jo")
+  q1 << 'jo'
   q1.enqueue(false)
 
   puts "q1 == q2 #=> #{q1 == q2} (expected: false)"
 
-  q2.enqueue("jo")
-  q2.enqueue(false)
+  q2.enqueue('jo')
+  q2 << false
 
   puts "q1 == q2 #=> #{q1 == q2} (expected: true)"
 
@@ -25,21 +25,23 @@ begin
   puts "q1 == q2 #=> #{q1 == q2} (expected: false)"
 
   # q2.enqueue(nil)
-  # puts 'nil enqueued!'
 
   puts "q1: #{q1.to_s}"
   puts "q2: #{q2.to_s}"
 
   s1.push(1)
-  s1.push(2)
+  s1 << 2
   s1.push(3)
-  s1.pop
-  s1.pop
   puts s1
 
-rescue QueueError => qe
+rescue QueueEnqueueError, QueueDequeueError => qe
   puts "\nQueueError: #{qe.message}"
   qe.backtrace.each do |loc|
+    puts "in: #{loc}"
+  end
+rescue StackPushError, StackPopError => se
+  puts "\nQueueError: #{se.message}"
+  se.backtrace.each do |loc|
     puts "in: #{loc}"
   end
 rescue ArgumentError => ae

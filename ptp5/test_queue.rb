@@ -10,14 +10,14 @@ class TestQueue < Test::Unit::TestCase
   end
 
   def test_enqueue
-    assert(@q1.enqueue(5))
+    assert_nothing_raised { @q1.enqueue(5) }
     assert_raise(QueueEnqueueError) { @q1.enqueue(nil) }
   end
 
   def test_dequeue
     assert_raise(QueueDequeueError) { @q2.dequeue }
     @q2.enqueue(5)
-    assert_equal(5, @q2.dequeue)
+    assert_nothing_raised { @q2.dequeue }
   end
 
   def test_empty

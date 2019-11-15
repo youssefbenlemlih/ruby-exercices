@@ -17,6 +17,10 @@ class Stack
     elem
   end
 
+  def <<(elem)
+    push(elem)
+  end
+
   def pop
     raise(StackPopError, 'The Stack is empty, you cannot dequeue anything of it!') if empty?
 
