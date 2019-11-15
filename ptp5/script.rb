@@ -1,3 +1,5 @@
+# Author:: Youssef Benlemlih
+# Author:: Jonas Krukenberg
 require_relative "queue"
 require_relative "stack"
 
@@ -28,11 +30,11 @@ begin
   puts "q1: #{q1.to_s}"
   puts "q2: #{q2.to_s}"
 
-  s1.enqueue(1)
-  s1.enqueue(2)
-  s1.enqueue(3)
-  s1.dequeue
-  s1.dequeue
+  s1.push(1)
+  s1.push(2)
+  s1.push(3)
+  s1.pop
+  s1.pop
   puts s1
 
 rescue QueueError => qe

@@ -1,5 +1,7 @@
-require "test/unit"
-require_relative "queue"
+# Author:: Youssef Benlemlih
+# Author:: Jonas Krukenberg
+require 'test/unit'
+require_relative 'queue'
 
 class TestQueue < Test::Unit::TestCase
   def setup
@@ -9,11 +11,13 @@ class TestQueue < Test::Unit::TestCase
 
   def test_enqueue
     assert(@q1.enqueue(5))
-    # assert_raise..? @q1.enqueue(nil)
+    assert_raise(QueueEnqueueError) { @q1.enqueue(nil) }
   end
 
   def test_dequeue
-    # assert_raise...? @q1.dequeue
+    assert_raise(QueueDequeueError) { @q2.dequeue }
+    @q2.enqueue(5)
+    assert_equal(5, @q2.dequeue)
   end
 
   def test_empty
