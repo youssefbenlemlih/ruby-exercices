@@ -27,6 +27,14 @@ begin
 
   puts "q1: #{q1.to_s}"
   puts "q2: #{q2.to_s}"
+
+  s1.enqueue(1)
+  s1.enqueue(2)
+  s1.enqueue(3)
+  s1.dequeue
+  s1.dequeue
+  puts s1
+
 rescue QueueError => qe
   puts "\nQueueError: #{qe.message}"
   qe.backtrace.each do |loc|

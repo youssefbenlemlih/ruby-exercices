@@ -1,19 +1,21 @@
-require_relative "stack_error"
+require_relative 'stack_error'
 
 class Stack
+  attr_reader :content
+  protected :content
   def initialize
     @content = []
   end
 
   def enqueue(elem)
-    raise(StackError, "You cannot add nil to this Queue!") if elem.nil?
+    raise(StackError, 'You cannot add nil to this Stack!') if elem.nil?
 
     @content.insert(@content.length, elem)
     elem
   end
 
   def dequeue
-    raise(StackError, "The Stack is empty, you cannot dequeue anything of it!") if empty?
+    raise(StackError, 'The Stack is empty, you cannot dequeue anything of it!') if empty?
     @content.delete_at(0)
   end
 
