@@ -29,7 +29,7 @@ begin
   puts "q1: #{q1.to_s}"
   puts "q2: #{q2.to_s}"
 
-  s1.push(1)
+  s1.push(2)
   s1 << 2
   s1.push(3)
   puts s1
@@ -37,21 +37,16 @@ begin
 rescue QueueEnqueueError, QueueDequeueError => qe
   puts "\nQueueError: #{qe.message}"
   qe.backtrace.each do |loc|
-    puts "in: #{loc}"
+    puts "loc: #{loc}"
   end
 rescue StackPushError, StackPopError => se
-  puts "\nQueueError: #{se.message}"
+  puts "\nStackError: #{se.message}"
   se.backtrace.each do |loc|
-    puts "in: #{loc}"
-  end
-rescue ArgumentError => ae
-  puts "\nArgumentError: #{ae.message}"
-  ae.backtrace.each do |loc|
-    puts "in: #{loc}"
+    puts "loc: #{loc}"
   end
 rescue => e
-  puts "\nError: #{e.message}"
+  puts "\n#{e.class}: #{e.message}"
   e.backtrace.each do |loc|
-    puts "in: #{loc}"
+    puts " loc: #{loc}"
   end
 end

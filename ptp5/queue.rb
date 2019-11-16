@@ -1,7 +1,14 @@
 # Author:: Youssef Benlemlih
 # Author:: Jonas Krukenberg
-require_relative 'queue_error'
 
+# Error class for enqueue errors
+class QueueEnqueueError < StandardError; end
+
+# Error class for dequeue errors
+class QueueDequeueError < StandardError; end
+
+# A simple Queue where elements are added to the top and
+# we only get the element that lastet the longest time within the Queue
 class Queue
   attr_reader :content
   protected :content
@@ -37,11 +44,13 @@ class Queue
     @content == other.content
   end
 
-  def eql?(other)
-    self.== other
+  def hash
+    @content.hash
   end
 
   def to_s
     @content.to_s
   end
+
+  alias eql? ==
 end
