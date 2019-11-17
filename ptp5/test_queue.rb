@@ -28,9 +28,7 @@ class TestQueue < Test::Unit::TestCase
 
   def test_comparison
     queues = {}
-    queues[@q1] = 'test'
 
-    assert_equal('test', queues[@q2])
     assert(@q1 == @q1)
     assert(@q1 == @q2)
 
@@ -43,8 +41,8 @@ class TestQueue < Test::Unit::TestCase
 
     @q2.enqueue(0)
     assert(@q1 == @q2)
-    puts @q1.hash
-    puts @q2.hash
+    queues[@q1] = 'test'
+    assert_equal('test', queues[@q1])
     assert_equal('test', queues[@q2])
   end
 end

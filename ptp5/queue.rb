@@ -64,5 +64,10 @@ class Queue
     @content.to_s
   end
 
+  # Returns the number of elements in the Queue
+  def length
+    @content.length
+  end
+
   alias eql? ==
 end

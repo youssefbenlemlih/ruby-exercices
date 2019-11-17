@@ -64,6 +64,11 @@ class Stack
     @content.to_s
   end
 
+  # Returns the number of elements in the Stack
+  def length
+    @content.length
+  end
+
   # Whether the Stacks are equal (contain the same elements)
   alias eql? ==
 end
