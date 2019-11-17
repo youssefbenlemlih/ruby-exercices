@@ -20,22 +20,17 @@ class Stack
   # Adds an element to the Stack
   # Throws a StackPushError if the element is nil
   # @param elem: The element to add
+  # @return [Object] Element which was just added
   def push(elem)
     raise(StackPushError, 'You cannot add nil to this Stack!') if elem.nil?
 
-    @content.insert(@content.length, elem)
+    @content << elem
     elem
-  end
-
-  # Adds an element to the Stack
-  # Throws a StackPushError id the element is nil
-  # @param elem: The element to add
-  def <<(elem)
-    push(elem)
   end
 
   # Pops out the last element in the Stack
   # Throws a StackPopError if the Stack is not empty
+  # @return [Object] element which was deleted
   def pop
     raise(StackPopError, 'The Stack is empty, you cannot pop anything of it!') if empty?
 
@@ -69,6 +64,7 @@ class Stack
     @content.length
   end
 
-  # Whether the Stacks are equal (contain the same elements)
+  # Whether the Stacks are eql? (contain the same elements)
   alias eql? ==
+  alias << push
 end

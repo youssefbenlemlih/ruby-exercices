@@ -28,14 +28,16 @@ class TestStack < Test::Unit::TestCase
   end
 
   def test_comparison
+
     stacks = {}
-    stacks[@s1] = 'test'
 
     @s1.push(3)
     assert(@s1 != @s2)
     assert_nil(stacks[@s2])
     @s2.push(3)
     assert(@s1 == @s2)
+
+    stacks[@s1] = 'test'
 
     assert_equal('test', stacks[@s2])
     assert_false(@s1 == [10, 11])

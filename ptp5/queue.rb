@@ -20,6 +20,7 @@ class Queue
   # Adds an element on the top of the queue
   # Throws a QueueEnqueueError id the element is nil
   # @param elem: The element to add
+  # @return [Object] Element which was just added
   def enqueue(elem)
     raise(QueueEnqueueError, 'You cannot add nil to this Queue!') if elem.nil?
 
@@ -27,16 +28,9 @@ class Queue
     elem
   end
 
-  # Adds an element on the top of the queue
-  # Throws a QueueEnqueueError id the element is nil
-  # @param elem: The element to add
-  def <<(elem)
-    enqueue(elem)
-  end
-
-
   # Pops out the last element in the queue
   # Throws a QueueEnqueueError id the queue is not empty
+  # @return [Object] Element which was deleted
   def dequeue
     raise(QueueDequeueError, 'The Queue is empty, you cannot dequeue anything of it!') if empty?
 
@@ -70,4 +64,5 @@ class Queue
   end
 
   alias eql? ==
+  alias << enqueue
 end
