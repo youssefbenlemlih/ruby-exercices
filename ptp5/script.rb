@@ -6,7 +6,6 @@ require_relative 'stack'
 q1 = Queue.new
 q2 = Queue.new
 s1 = Stack.new
-s2 = Stack.new
 
 begin
   puts "q1.empty? #=> #{q1.empty?} (expected: true)"
@@ -34,16 +33,6 @@ begin
   s1.push(3)
   puts s1
 
-rescue QueueEnqueueError, QueueDequeueError => qe
-  puts "\nQueueError: #{qe.message}"
-  qe.backtrace.each do |loc|
-    puts "loc: #{loc}"
-  end
-rescue StackPushError, StackPopError => se
-  puts "\nStackError: #{se.message}"
-  se.backtrace.each do |loc|
-    puts "loc: #{loc}"
-  end
 rescue => e
   puts "\n#{e.class}: #{e.message}"
   e.backtrace.each do |loc|
