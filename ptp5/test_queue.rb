@@ -39,6 +39,8 @@ class TestQueue < Test::Unit::TestCase
     assert_false(@q1 == [10, 11])
     assert_false(@q1.eql?([10, 11]))
 
+    assert_equal(@q1.hash,@q2.hash) if @q1.eql?(@q2)#khb
+
     @q2.enqueue(0)
     assert(@q1 == @q2)
     queues[@q1] = 'test'
