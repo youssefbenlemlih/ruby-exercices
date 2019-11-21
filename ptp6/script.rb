@@ -15,6 +15,7 @@ jerry = Cat.new("Jerry", Date.new(2015,02,14), hans, joe)
 
 tom.kill(mike)
 tom.kill(jerry)
+tom.kill(jerry)
 mike.kill(bello)
 mike.kill(tom)
 puts hans

@@ -17,6 +17,10 @@ class PetsTest < Test::Unit::TestCase
     @c_jerry = Cat.new("Jerry", Date.new(2015,02,14), @p_hans)
   end
 
+  def test_kill
+    assert_false(@c_tom.kill(@c_tom))
+  end
+
   def test_consistency
     assert_equal(@c_tom, @c_tom2)
     assert(@c_tom.eql?(@c_tom2))

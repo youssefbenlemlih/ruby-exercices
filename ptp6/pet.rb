@@ -17,7 +17,7 @@ class Pet
 
   def kill(other)
     return false if !self.is_a?(Cat) && other.is_a?(Cat)
-    return false if self.equal?(other)
+    return false if self == other
     other.die
   end
 
