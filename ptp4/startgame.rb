@@ -24,5 +24,5 @@ begin
   config['codebreaker_is_human'] = %w[1 3].include?(mode)
   game = Mastermind.new(config)
   game.start
-  puts 'Nochmal spielen?'
+  puts 'Nochmal spielen? [j,ja|...]'
 end while %w[j ja].include?(gets.chomp.downcase)

@@ -1,4 +1,6 @@
+require_relative 'consistency'
 class Person
+  include Consistency
   attr_reader :name
 
   def initialize(name)
@@ -13,4 +15,5 @@ class Person
   def to_s
     "#{self.class}: name: #{@name} pets: #{@pets.map {|pet| pet.name}}"
   end
+
 end

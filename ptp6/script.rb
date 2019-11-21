@@ -6,10 +6,14 @@ require_relative 'person'
 
 hans = Person.new('hans')
 joe = Person.new('joe')
+
 bello = Dog.new('bello', Date.new(2019,11,19), hans)
 mike = Dog.new('mike', Date.new(2010,11,1), hans)
+
 tom = Cat.new("Tom", Date.new(2015,02,14), hans, joe)
+tom2 = Cat.new("Tom", Date.new(2015,02,14), hans, joe)
 jerry = Cat.new("Jerry", Date.new(2015,02,14), hans, joe)
+
 tom.kill(mike)
 tom.kill(jerry)
 mike.kill(bello)
@@ -20,3 +24,9 @@ puts bello
 puts mike
 puts tom
 puts jerry
+
+h = {}
+h[tom] = 'thomas'
+puts tom == tom2
+puts tom.eql?(tom2)
+p h[tom2]
