@@ -1,6 +1,5 @@
 require 'date'
 require_relative 'cat'
-require_relative 'pet'
 require_relative 'dog'
 require_relative 'person'
 
@@ -24,9 +23,3 @@ puts bello
 puts mike
 puts tom
 puts jerry
-
-h = {}
-h[tom] = 'thomas'
-puts tom == tom2
-puts tom.eql?(tom2)
-p h[tom2]
