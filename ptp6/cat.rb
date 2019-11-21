@@ -1,3 +1,5 @@
+# Author:: Youssef Benlemlih
+# Author:: Jonas Krukenberg
 require_relative './pet'
 class Cat < Pet
 

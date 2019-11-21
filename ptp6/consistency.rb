@@ -1,3 +1,5 @@
+# Author:: Youssef Benlemlih
+# Author:: Jonas Krukenberg
 module Consistency
   def ==(other)
     return true if self.equal?(other)

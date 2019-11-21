@@ -1,3 +1,5 @@
+# Author:: Youssef Benlemlih
+# Author:: Jonas Krukenberg
 require 'date'
 require_relative 'cat'
 require_relative 'dog'

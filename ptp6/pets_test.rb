@@ -1,3 +1,5 @@
+# Author:: Youssef Benlemlih
+# Author:: Jonas Krukenberg
 require 'test/unit'
 require 'date'
 require_relative 'person'
