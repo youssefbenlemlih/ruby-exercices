@@ -7,6 +7,10 @@ class Cat < Pet
     persons.each { |p| p.add_pet(self) }
   end
 
+  def request_service(service)
+
+  end
+
   def special_to_s
     "personal: #{@personal.map { |p| p.name }}"
   end

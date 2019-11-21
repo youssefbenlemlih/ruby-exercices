@@ -12,6 +12,14 @@ class Person
     @pets << pet
   end
 
+  def stroke(pet)
+
+  end
+
+  def feed(pet)
+
+  end
+
   def to_s
     "#{self.class}: name: #{@name} pets: #{@pets.map {|pet| pet.name}}"
   end
