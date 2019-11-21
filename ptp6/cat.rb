@@ -6,7 +6,8 @@ class Cat < Pet
   def initialize(name, birthday, *persons)
     super(name, birthday,9)
     @personal = persons
-    persons.each { |p| p.add_pet(self) }
+    persons.each { |p| p.add_pet(self) if p.is_a?(Person) }
+    # TODO: Raise exception if none of *persons is a Person?
   end
 
   def stroke(stroker)
