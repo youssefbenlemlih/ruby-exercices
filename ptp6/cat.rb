@@ -9,8 +9,14 @@ class Cat < Pet
     persons.each { |p| p.add_pet(self) }
   end
 
-  def request_service(service)
+  def stroke(stroker)
+    return false unless @personal.include?(stroker)
+    true
+  end
 
+  def feed(feeder)
+    false unless @personal.include?(feeder)
+    true
   end
 
   def special_to_s

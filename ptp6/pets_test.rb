@@ -21,6 +21,8 @@ class PetsTest < Test::Unit::TestCase
 
   def test_kill
     assert_false(@c_tom.kill(@c_tom))
+    @d_bello.kill(@d_mike)
+    assert_false(@d_bello.kill(@d_mike))
   end
 
   def test_consistency
@@ -30,5 +32,13 @@ class PetsTest < Test::Unit::TestCase
     h = {}
     h[@c_tom] = 'Thomas'
     assert_equal('Thomas', h[@c_tom2])
+  end
+
+  def test_services
+    assert(@c_tom.request_stroke(@p_hans))
+    assert_false(@c_jerry.request_stroke(@p_joe))
+    assert(@p_joe.stroke(@d_mike))
+    assert_false(@p_joe.stroke(@p_hans))
+    assert_false(@d_bello.stroke(@d_mike))
   end
 end
