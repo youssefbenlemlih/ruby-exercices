@@ -14,22 +14,26 @@ class Pet
     @alive = true
   end
 
-  def request_stroke(person)
-    return false unless person.respond_to?(:stroke)
-    person.stroke(self)
+  def request_service(person, service)
+   
+    if service == :feed
+             return false unless person.respond_to?(:feed)
+        person.feed(self)
+
+    elsif service == :stroke
+                 return false unless person.respond_to?(:stroke)
+        person.stroke(self)
+ 
+    end
   end
 
-  def request_feed(person)
-    return false unless person.respond_to?(:feed)
-    person.feed(self)
-  end
 
-  def stroke(stroker)
+  def get_stroke(stroker)
     return false unless stroker.is_a?(Person)
     true
   end
 
-  def feed(feeder)
+  def get_feed(feeder)
     return false unless feeder.is_a?(Person)
     true
   end
@@ -41,7 +45,7 @@ class Pet
   # TODO: Maybe rather raise an exception than returning false..?
   def kill(other)
     return false if !self.is_a?(Cat) && other.is_a?(Cat)
-    return false if self == other
+    return false if self == other && self.is_a?(Cat)
     return false unless other.alive
     other.die
   end

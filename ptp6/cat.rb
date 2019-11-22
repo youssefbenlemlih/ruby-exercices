@@ -10,12 +10,12 @@ class Cat < Pet
     # TODO: Raise exception if none of *persons is a Person?
   end
 
-  def stroke(stroker)
+  def get_stroke(stroker)
     return false unless @personal.include?(stroker)
     true
   end
 
-  def feed(feeder)
+  def get_feed(feeder)
     false unless @personal.include?(feeder)
     true
   end

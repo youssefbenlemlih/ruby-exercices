@@ -35,10 +35,10 @@ class PetsTest < Test::Unit::TestCase
   end
 
   def test_services
-    assert(@c_tom.request_stroke(@p_hans))
-    assert_false(@c_jerry.request_stroke(@p_joe))
+    assert(@c_tom.request_service(@p_hans,:stroke))
+    assert_false(@c_jerry.request_service(@p_joe,:stroke))
     assert(@p_joe.stroke(@d_mike))
     assert_false(@p_joe.stroke(@p_hans))
-    assert_false(@d_bello.stroke(@d_mike))
+    assert_false(@d_bello.get_stroke(@d_mike))
   end
 end

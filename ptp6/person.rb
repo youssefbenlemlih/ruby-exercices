@@ -16,13 +16,13 @@ class Person
 
   def stroke(pet)
     return false unless pet.is_a?(Pet)
-    return pet.stroke(self) if pet.respond_to?(:stroke)
+    return pet.get_stroke(self) if pet.respond_to?(:get_stroke)
     false
   end
 
   def feed(pet)
     return false unless pet.is_a?(Pet)
-    return pet.stroke(self) if pet.respond_to?(:feed)
+    return pet.get_feed(self) if pet.respond_to?(:get_feed)
     false
   end
 
