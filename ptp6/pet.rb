@@ -21,22 +21,17 @@ class Pet
     person.give_service(self, service)
   end
 
-# @param [Person] stoker
-  def get_stroke(stoker)
-    unless stoker.is_a?(Person)
-      raise PetError, 'A pet can only be stroked by a person'
+  def get_service(giver, service)
+    unless giver.is_a?(Person)
+      raise PetError, 'A pet can only get a service from a Person'
     end
-
-    puts "I (#{name}) am getting stroked by #{stoker.name}"
-  end
-
-  def get_feed(feeder)
-    unless feeder.is_a?(Person)
-      raise PetError, 'A pet can only be fed by a person'
+    if service == :stroke
+      puts "I (#{name}) am getting stroked by #{giver.name}"
+    elsif service == :feed
+      puts "I (#{name}) am getting fed by #{giver.name}"
+    else
+      raise PetError, "A Pet cannot recieve the service '#{service}'"
     end
-
-    puts "I (#{name}) am being fed by #{feeder.name}"
-    true
   end
 
   def to_s

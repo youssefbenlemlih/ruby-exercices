@@ -35,10 +35,10 @@ class PetsTest < Test::Unit::TestCase
   end
 
   def test_services
-    assert(@c_tom.request_service(@p_hans,:stroke))
+    assert_nothing_raised{@c_tom.request_service(@p_hans,:stroke)}
     assert_nothing_raised{@c_jerry.request_service(@p_joe,:stroke)}
     assert_nothing_raised{@p_joe.give_service(@d_mike,:stroke)}
     assert_raise(PersonError){@p_joe.give_service(@p_hans,:stroke)}
-    assert_raise(PetError){@d_bello.get_stroke(@d_mike)}
+    assert_raise(PetError){@d_bello.get_service(@d_mike,:stroke)}
   end
 end

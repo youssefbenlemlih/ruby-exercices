@@ -19,13 +19,7 @@ class Person
   def give_service(pet, service)
     raise PersonError, 'A person can only stroke or feed a Pet' unless pet.is_a?(Pet)
 
-    if (service == :feed)
-      pet.get_feed(self)
-    elsif service == :stroke
-      pet.get_stroke(self)
-    else
-      raise PersonError, "The requested service '#{service}' is not available"
-    end
+    pet.get_service(self, service)
   end
 
   def to_s
