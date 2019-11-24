@@ -1,7 +1,8 @@
 # Author:: Youssef Benlemlih
 # Author:: Jonas Krukenberg
 require_relative 'consistency'
-
+class PetError < StandardError
+end
 class Pet
   include Consistency
   attr_reader :name, :alive
@@ -15,15 +16,15 @@ class Pet
   end
 
   def request_service(person, service)
-   
+
     if service == :feed
-             return false unless person.respond_to?(:feed)
-        person.feed(self)
+      return false unless person.respond_to?(:feed)
+      person.feed(self)
 
     elsif service == :stroke
-                 return false unless person.respond_to?(:stroke)
-        person.stroke(self)
- 
+      return false unless person.respond_to?(:stroke)
+      person.stroke(self)
+
     end
   end
 
