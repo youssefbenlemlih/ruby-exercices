@@ -2,6 +2,7 @@
 # Author:: Jonas Krukenberg
 require_relative './pet'
 
+class CatError < StandardError; end
 # The class of Cats
 # Is a subclass of Pet
 class Cat < Pet

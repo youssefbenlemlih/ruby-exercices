@@ -1,6 +1,8 @@
 # Author:: Youssef Benlemlih
 # Author:: Jonas Krukenberg
 require_relative 'consistency'
+class PersonError < StandardError;
+end
 class Person
   include Consistency
   attr_reader :name
@@ -15,19 +17,19 @@ class Person
   end
 
   def stroke(pet)
-    return false unless pet.is_a?(Pet)
-    return pet.get_stroke(self) if pet.respond_to?(:get_stroke)
-    false
+    raise PersonError, 'A person can only stroke a Pet' unless pet.is_a?(Pet)
+
+    pet.get_stroke(self) if pet.respond_to?(:get_stroke)
   end
 
   def feed(pet)
-    return false unless pet.is_a?(Pet)
-    return pet.get_feed(self) if pet.respond_to?(:get_feed)
-    false
+    raise PersonError, 'A person can only feed a Pet' unless pet.is_a?(Pet)
+
+    pet.get_feed(self) if pet.respond_to?(:get_feed)
   end
 
   def to_s
-    "#{self.class}: name: #{@name} pets: #{@pets.map {|pet| pet.name}}"
+    "#{self.class}: name: #{@name} pets: #{@pets.map { |pet| pet.name }}"
   end
 
 end

@@ -20,9 +20,9 @@ class PetsTest < Test::Unit::TestCase
   end
 
   def test_kill
-    assert_false(@c_tom.kill(@c_tom))
+    assert_raise(CatError){@c_tom.kill(@c_tom)}
     @d_bello.kill(@d_mike)
-    assert_false(@d_bello.kill(@d_mike))
+    assert_raise(PetError){@d_bello.kill(@d_mike)}
   end
 
   def test_consistency
@@ -36,9 +36,9 @@ class PetsTest < Test::Unit::TestCase
 
   def test_services
     assert(@c_tom.request_service(@p_hans,:stroke))
-    assert_false(@c_jerry.request_service(@p_joe,:stroke))
-    assert(@p_joe.stroke(@d_mike))
-    assert_false(@p_joe.stroke(@p_hans))
-    assert_false(@d_bello.get_stroke(@d_mike))
+    assert_nothing_raised{@c_jerry.request_service(@p_joe,:stroke)}
+    assert_nothing_raised{@p_joe.stroke(@d_mike)}
+    assert_raise(PersonError){@p_joe.stroke(@p_hans)}
+    assert_raise(PetError){@d_bello.get_stroke(@d_mike)}
   end
 end

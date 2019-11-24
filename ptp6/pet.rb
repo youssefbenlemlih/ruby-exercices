@@ -28,14 +28,21 @@ class Pet
     end
   end
 
+  # @param [Person] stoker
+  def get_stroke(stoker)
+    unless stoker.is_a?(Person)
+      raise PetError, 'A pet can only be stroked by a person'
+    end
 
-  def get_stroke(stroker)
-    return false unless stroker.is_a?(Person)
-    true
+    puts "I (#{name}) am getting stroked by #{stoker.name}"
   end
 
   def get_feed(feeder)
-    return false unless feeder.is_a?(Person)
+    unless feeder.is_a?(Person)
+      raise PetError, 'A pet can only be fed by a person'
+    end
+
+    puts "I (#{name}) am being fed by #{feeder.name}"
     true
   end
 
@@ -43,11 +50,18 @@ class Pet
     "#{self.class}: name: #{@name}, birthday: #{@birthday}, lifes: #{@lifes}, alive: #{@alive} #{self.special_to_s}"
   end
 
-  # TODO: Maybe rather raise an exception than returning false..?
+  # @param [Pet] other The victim
   def kill(other)
-    return false if !self.is_a?(Cat) && other.is_a?(Cat)
-    return false if self == other && self.is_a?(Cat)
-    return false unless other.alive
+    if !is_a?(Cat) && other.is_a?(Cat)
+      raise CatError, 'Only a cat can kill another Cat.'
+    end
+
+    raise CatError, 'A Cat cannot kill himself.' if self == other && is_a?(Cat)
+
+    unless other.alive
+      raise PetError, "Cannot kill #{other.name} as it is already dead."
+    end
+
     other.die
   end
 
@@ -56,5 +70,6 @@ class Pet
   def die
     @lifes -= 1
     @alive = @lifes != 0
+    puts "I (#{name}) am now dead" unless @alive
   end
 end
