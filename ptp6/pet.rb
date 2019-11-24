@@ -36,7 +36,9 @@ class Pet
     unless giver.is_a?(Person)
       raise PetError, 'A pet can only get a service from a Person'
     end
-
+    unless alive
+      raise PetError, "Cannot receive a service as I (#{@name}) am already dead."
+    end
     if service == :stroke
       puts "I (#{name}) am getting stroked by #{giver.name}"
     elsif service == :feed
@@ -58,6 +60,10 @@ class Pet
   def kill(other)
     if !is_a?(Cat) && other.is_a?(Cat)
       raise CatError, 'Only a cat can kill another Cat.'
+    end
+
+    unless alive
+      raise PetError, "Cannot kill a Pet as I (#{@name}) am already dead."
     end
 
     unless other.alive
