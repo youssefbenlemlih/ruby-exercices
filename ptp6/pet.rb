@@ -49,11 +49,7 @@ class Pet
   end
 
   def to_s
-    "#{self.class}: name: #{@name}, birthday: #{@birthday}, lifes: #{@lifes}, alive: #{@alive} #{special_to_s}"
-  end
-
-  def special_to_s
-    ''
+    "#{self.class}: name: #{@name}, birthday: #{@birthday}, lifes: #{@lifes}, alive: #{@alive}"
   end
 
   # @param [Pet] other The victim

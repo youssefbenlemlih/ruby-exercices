@@ -37,7 +37,7 @@ class Cat < Pet
   end
 
 
-  def special_to_s
-    "personal: #{@personal.map { |p| p.name }}"
+  def to_s
+    "#{super}, personal: #{@personal.map { |p| p.name }}"
   end
 end
