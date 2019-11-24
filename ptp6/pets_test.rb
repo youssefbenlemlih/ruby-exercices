@@ -36,7 +36,7 @@ class PetsTest < Test::Unit::TestCase
 
   def test_services
     assert_nothing_raised{@c_tom.request_service(@p_hans,:stroke)}
-    assert_nothing_raised{@c_jerry.request_service(@p_joe,:stroke)}
+    assert_raise(CatError){@c_jerry.request_service(@p_joe,:stroke)}
     assert_nothing_raised{@p_joe.give_service(@d_mike,:stroke)}
     assert_raise(PersonError){@p_joe.give_service(@p_hans,:stroke)}
     assert_raise(PetError){@d_bello.get_service(@d_mike,:stroke)}

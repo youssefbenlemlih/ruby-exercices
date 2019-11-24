@@ -2,7 +2,10 @@
 # Author:: Jonas Krukenberg
 require_relative './pet'
 
-class CatError < StandardError; end
+# A subclass of StandardError to manage not allowed Cat operations
+class CatError < StandardError;
+end
+
 # The class of Cats
 # Is a subclass of Pet
 class Cat < Pet
@@ -19,15 +22,20 @@ class Cat < Pet
     end
   end
 
-  def get_stroke(stroker)
-    return false unless @personal.include?(stroker)
-    true
+  def get_service(giver, service)
+    unless @personal.include?(giver)
+      raise CatError, 'A Cat can only receive a receive from his own Personal'
+    end
+
+    super(giver, service)
   end
 
-  def get_feed(feeder)
-    false unless @personal.include?(feeder)
-    true
+  def kill(other)
+    raise CatError, 'A Cat cannot kill himself.' if self == other
+
+    super(other)
   end
+
 
   def special_to_s
     "personal: #{@personal.map { |p| p.name }}"

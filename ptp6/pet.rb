@@ -2,7 +2,7 @@
 # Author:: Jonas Krukenberg
 require_relative 'consistency'
 
-# A subclass of [StandardError] to manage not allowed pet operations
+# A subclass of StandardError to manage not allowed Pet operations
 class PetError < StandardError
 end
 
@@ -59,8 +59,6 @@ class Pet
     if !is_a?(Cat) && other.is_a?(Cat)
       raise CatError, 'Only a cat can kill another Cat.'
     end
-
-    raise CatError, 'A Cat cannot kill himself.' if self == other && is_a?(Cat)
 
     unless other.alive
       raise PetError, "Cannot kill #{other.name} as it is already dead."
