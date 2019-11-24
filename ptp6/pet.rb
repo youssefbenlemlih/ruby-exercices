@@ -16,19 +16,12 @@ class Pet
   end
 
   def request_service(person, service)
+    raise PetError, "A pet can only request a service from a Person" unless person.is_a?(Person)
 
-    if service == :feed
-      return false unless person.respond_to?(:feed)
-      person.feed(self)
-
-    elsif service == :stroke
-      return false unless person.respond_to?(:stroke)
-      person.stroke(self)
-
-    end
+    person.give_service(self, service)
   end
 
-  # @param [Person] stoker
+# @param [Person] stoker
   def get_stroke(stoker)
     unless stoker.is_a?(Person)
       raise PetError, 'A pet can only be stroked by a person'
@@ -50,7 +43,7 @@ class Pet
     "#{self.class}: name: #{@name}, birthday: #{@birthday}, lifes: #{@lifes}, alive: #{@alive} #{self.special_to_s}"
   end
 
-  # @param [Pet] other The victim
+# @param [Pet] other The victim
   def kill(other)
     if !is_a?(Cat) && other.is_a?(Cat)
       raise CatError, 'Only a cat can kill another Cat.'
@@ -72,4 +65,5 @@ class Pet
     @alive = @lifes != 0
     puts "I (#{name}) am now dead" unless @alive
   end
+
 end

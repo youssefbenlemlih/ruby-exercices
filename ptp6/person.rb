@@ -16,16 +16,16 @@ class Person
     @pets << pet
   end
 
-  def stroke(pet)
-    raise PersonError, 'A person can only stroke a Pet' unless pet.is_a?(Pet)
+  def give_service(pet, service)
+    raise PersonError, 'A person can only stroke or feed a Pet' unless pet.is_a?(Pet)
 
-    pet.get_stroke(self) if pet.respond_to?(:get_stroke)
-  end
-
-  def feed(pet)
-    raise PersonError, 'A person can only feed a Pet' unless pet.is_a?(Pet)
-
-    pet.get_feed(self) if pet.respond_to?(:get_feed)
+    if (service == :feed)
+      pet.get_feed(self)
+    elsif service == :stroke
+      pet.get_stroke(self)
+    else
+      raise PersonError, "The requested service '#{service}' is not available"
+    end
   end
 
   def to_s
