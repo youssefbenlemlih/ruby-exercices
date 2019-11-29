@@ -13,6 +13,7 @@ end
 
 :sym #= #{1+1}
 
-var = :"#{1+1}"
+# puts :var =>  :"#{1+1}"
 
-puts :var
+var = :"a#{1+1}"
+puts var.inspect
