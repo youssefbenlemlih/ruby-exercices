@@ -42,7 +42,7 @@ module FileHandler
 
   # @return [String] path string of first file where str was found or empty string
   def self.search(str)
-    Dir['parts/*.txt'].each do |path|
+    Dir['parts/*.yml'].each do |path|
       File.open(path) do |file|
         content = file.read.chomp.downcase
         return path unless content[str.downcase].nil?
