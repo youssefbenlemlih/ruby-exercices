@@ -9,10 +9,9 @@ class Part
   include Consistency
   include FileHandler
 
-  attr_reader :mass, :name, :parent
-  protected :mass, :name, :parent
-
-  @@parts = {}
+  attr_reader :name, :parent, :parts
+  attr_accessor :mass
+  protected :mass, :name, :parent, :parts
 
   def initialize(name, mass = 0, parent = nil)
     @name = name.capitalize
@@ -22,51 +21,54 @@ class Part
                   FileHandler.search(name)[/\/(\w*)\.yml/, 1]
                 end
 
-    unless @@parts[@listname].is_a?(Array)
-      @@parts[@listname] = []
-      partlist = load_partlist
-      p = Part.new(@listname)
-      @@parts[@listname] << p
-      p.fetch_parts(partlist)
-    end
-
-    if mass.zero? && parent.nil?
-      # we only get in here at the initial Part call
-      # TODO: calc mass here
-      @parent = @@parts[@listname].select { |part| part.name == @name }[0]
-    else
-      @parent = parent
-      @mass = mass
-      # @parent[name] = self unless @parent.nil?
-    end
+    @partlist = load_partlist
+    partlist_sub = find_first(@name, @partlist)[@name]
+    @parts = if partlist_sub.is_a?(Array)
+               fetch_parts(partlist_sub)
+             else
+               []
+             end
+    @mass = if partlist_sub.is_a?(Array)
+              calc_mass(partlist_sub)
+            else
+              partlist_sub
+            end
   end
 
   def load_partlist
     YAML.load_file(FileHandler.partlist_path(@listname))
   end
 
-  # @return [Hash] of Part objects
-  def fetch_parts(hash)
-    hash.each do |k, v|
-      if v.is_a?(Array)
-        # val is another list of parts which belongs to key
-        p = Part.new(k, 0, self)
-        @@parts[@listname] << p
-        v.each do |innerhash|
-          p.fetch_parts(innerhash)
+  def fetch_parts(partlist_sub)
+    parts = []
+    partlist_sub.each do |hash|
+      hash.each do |key, val|
+        if val.is_a?(Numeric)
+          parts << Part.new(key, val, self)
+        elsif val.is_a?(Array)
+          parts << Part.new(key, calc_mass(find_first(key, @partlist)[key]), self)
         end
-      else
-        # val is at the end of part tree, so we've got a mass
-        @@parts[@listname] << Part.new(k, v, self)
       end
     end
+    parts
   end
 
-  def [](partname)
-    @parts[partname]
+  # @param [Array] parts
+  def calc_mass(parts)
+    mass = 0
+    parts.each do |hash|
+      hash.each_value do |val|
+        if val.is_a?(Numeric)
+          mass += val
+        elsif val.is_a?(Array)
+          mass = calc_mass(val)
+        end
+      end
+    end
+    mass
   end
 
-  def add_part(name, mass)
+  def add(name, mass)
     @parts << Part.new(name, mass, self)
   end
 
@@ -75,37 +77,29 @@ class Part
   end
 
   def show_children
-    parent = self
     children = ''
-    @@parts[@listname].each do |val|
-      if val.name == @name
-        parent = val
-        next
-      end
-      children << "\n\s|- #{val}" if val.parent == parent
+    @parts.each do |part|
+      children << "\n\s|- #{part}"
     end
     children != '' ? "Direkt zugehörige Teile:\n#{@name}#{children}" : "#{@name} ist ein unterstes Teil"
   end
 
-  def show_tree
-    indent = 0
-    parent = nil
+  def show_tree(indent = 0)
     tree = ''
-    @@parts[@listname].each do |val|
-      if parent != val.parent
-        parent = val
-        indent += 1
+    @parts.each do |part|
+      if !part.parts.empty?
+        tree << part.show_tree(indent + 1)
+      else
+        tree << "\n#{"\s" * indent}|- #{part}"
       end
-      tree << "\n#{"\s" * indent}|- #{val}"
     end
-    'Stücklistenstruktur:' + tree
+    tree
   end
 
   def top
-    "Oberstes Teil: " + @@parts[@listname][0].to_s
+    "Oberstes Teil: " + @listname
   end
 
-=begin
   def find_first(name, partlist)
     partlist.each do |key, value|
       if key == name
@@ -119,20 +113,9 @@ class Part
     end
     nil
   end
-=end
-
-  protected
 
   def each
     @parts.each { |part| yield(part) }
   end
-
-  private
-
-=begin
-  def calc_mass
-    inject(0) { |sum, part| sum + part.mass }
-  end
-=end
 
 end

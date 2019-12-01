@@ -1,7 +1,8 @@
-Lenker:
+Fahrrad:
+- Lenker:
   - Klingel:
       - Glocke: 100
-      - Klingelhebel: 100
+      - Klingelhebel: 50
   - Bremse: 300
-Antriebseinheit: 2000
-Rahmen: 5000
+- Antriebseinheit: 2000
+- Rahmen: 5000

@@ -4,13 +4,15 @@ require_relative 'part'
 
 # @fahrrad = Part.new('fahrrad')
 # @klingel = Part.new('Klingel')
-@part = Part.new('lenker')
+@part = Part.new('fahrrad')
 
 puts @part.show_children
 puts
 puts @part.top
 puts
-puts @part.show_tree
+puts "Baum für #{@part}:" + @part.show_tree
+
+# @part.each { |p| puts p.inspect}
 
 # puts @fahrrad.to_s
 # puts @fahrrad["fahrrad"].to_s
