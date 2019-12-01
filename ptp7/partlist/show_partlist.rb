@@ -4,9 +4,13 @@ require_relative 'part'
 
 # @fahrrad = Part.new('fahrrad')
 # @klingel = Part.new('Klingel')
-@lenker = Part.new('klingel')
+@part = Part.new('lenker')
 
-# @lenker.show_children
+puts @part.show_children
+puts
+puts @part.top
+puts
+puts @part.show_tree
 
 # puts @fahrrad.to_s
 # puts @fahrrad["fahrrad"].to_s

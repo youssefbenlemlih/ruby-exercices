@@ -2,17 +2,17 @@
 # Author:: Jonas Krukenberg
 module FileHandler
 
-  def self.part_path(filename)
-    Dir["parts/#{filename}.txt"].empty? ? '' : "parts/#{filename}.txt"
+  def self.partlist_path(filename)
+    Dir["parts/#{filename}.yml"].empty? ? '' : "parts/#{filename}.yml"
   end
 
   def self.exists?(filename)
-    return false if part_path(filename) == ''
+    return false if partlist_path(filename) == ''
     true
   end
 
   def self.subparts(filename)
-    path = part_path(filename)
+    path = partlist_path(filename)
     parts = []
     File.open(path) do |file|
       rows = file.read.chomp.split("\n")
