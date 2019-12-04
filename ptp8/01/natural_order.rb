@@ -1,3 +1,6 @@
+# Author:: Youssef Benlemlih
+# Author:: Jonas Krukenberg
+
 class NaturalOrder
   include Comparable
   attr_reader :value

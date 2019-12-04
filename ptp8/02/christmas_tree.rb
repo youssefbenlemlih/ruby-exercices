@@ -1,16 +1,8 @@
+# Author:: Youssef Benlemlih
+# Author:: Jonas Krukenberg
 class ChristmasTree
   def initialize(n)
     @n = n
-  end
-
-  def columns
-    @n + 1
-  end
-
-  def lines()
-    n = @n
-    k = n / 2
-    (faculty(n)) / (faculty(n - k) * faculty(k))
   end
 
   def draw_tree
@@ -18,7 +10,7 @@ class ChristmasTree
     max_cols = @n + 1
     calc_tree.each do |row|
       print = " " * ((max_cols - row.length) / 2)
-      print *= (@n+1)
+      print *= (@n + 1)
       print << row.join(' ')
       result << "#{print}\n"
     end
@@ -50,15 +42,6 @@ class ChristmasTree
       n += 1
     end
     tree
-  end
-
-  # Function to calculate the faculty of an Integer
-  def faculty(i)
-    result = 1
-    i.times do |index|
-      result *= (index + 1)
-    end
-    result
   end
 end
 t = ChristmasTree.new(6)
