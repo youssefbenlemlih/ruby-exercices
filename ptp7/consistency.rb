@@ -25,7 +25,8 @@ module Consistency
 
   # @return [Integer] unique hashcode for an object based on all instance variables
   def hash
-    #TODO hash der Werte
-    instance_variables.hash
+    instance_variables.sort.map do |iv|
+      instance_variable_get(iv)
+    end.hash
   end
 end
