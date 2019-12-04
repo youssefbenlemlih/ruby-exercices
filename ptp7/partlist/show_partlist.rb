@@ -3,11 +3,13 @@
 require_relative 'part'
 
 @fahrrad = Part.from_file('Fahrrad')
+@fahrrad2 = Part.from_file('Fahrrad')
 @fahrrad.show_children
 @fahrrad.print_tree
-@fahrrad.each do |p|
-  puts p.to_s
-end
+# puts @fahrrad.inject(0) { |mass, p| mass + p.mass }
+# @fahrrad.each do |p|
+#   puts p.mass
+# end
 #@klingel = Part.from_file('klingel')
 #@lenker = Part.new('Lenker', 20)
 #puts "mass=#{@lenker.mass}"

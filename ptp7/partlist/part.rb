@@ -8,8 +8,8 @@ class Part
   include Enumerable
   include Consistency
 
-  attr_reader :name, :parent, :parts
-  protected :name, :parts
+  attr_reader :name, :parent, :parts, :mass
+  protected :parts, :mass, :name, :parent
 
   def initialize(name, mass, parent = nil)
     @name = name.capitalize
@@ -60,18 +60,12 @@ class Part
     end
   end
 
-  def mass
-    m = 0
-    if @parts.empty?
-      m = @mass
-    else
-      @parts.map { |k, v| m += v.mass }
-    end
-    m
+   def calc_mass
+    inject(0) { |mass, p| mass + p.mass }
   end
 
   def to_s
-    "#{@name} (#{mass}g)"
+    "#{@name} (#{calc_mass}g)"
   end
 
   def show_children
