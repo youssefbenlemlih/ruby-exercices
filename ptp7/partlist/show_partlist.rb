@@ -5,6 +5,9 @@ require_relative 'part'
 @fahrrad = Part.from_file('Fahrrad')
 @fahrrad.show_children
 @fahrrad.print_tree
+@fahrrad.each do |p|
+  puts p.to_s
+end
 #@klingel = Part.from_file('klingel')
 #@lenker = Part.new('Lenker', 20)
 #puts "mass=#{@lenker.mass}"

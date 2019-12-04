@@ -95,7 +95,14 @@ class Part
   end
 
   def each
-    @parts.each { |part| yield(part) }
+    if block_given?
+      yield self
+      @parts.each_value do |part|
+        part.each do |p|
+          yield(p)
+        end
+      end
+    end
   end
 
   def load_partlist
