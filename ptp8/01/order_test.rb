@@ -3,6 +3,7 @@
 require 'test/unit'
 require_relative './natural_order'
 
+# tests for NaturalOrder
 class NaturalTest < Test::Unit::TestCase
   def setup
     @order_12 = NaturalOrder.new(2, 2)

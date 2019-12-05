@@ -9,7 +9,7 @@ class ChristmasTree
     result = ''
     max_cols = @n + 1
     calc_tree.each do |row|
-      print = " " * ((max_cols - row.length) / 2)
+      print = ' ' * ((max_cols - row.length) / 2)
       print *= (@n + 1)
       print << row.join(' ')
       result << "#{print}\n"
@@ -23,7 +23,7 @@ class ChristmasTree
     while n <= @n
       result = []
       if n == 1
-        result = [%w(0 1)]
+        result = [%w[0 1]]
       else
         tree.each do |row|
           line1 = []
@@ -44,5 +44,3 @@ class ChristmasTree
     tree
   end
 end
-t = ChristmasTree.new(6)
-t.draw_tree
