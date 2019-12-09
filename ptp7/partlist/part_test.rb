@@ -8,8 +8,8 @@ class TestPart < Test::Unit::TestCase
   end
 
   def test_part
-    assert_equal(7610, @fahrrad.mass)
-    assert_equal(310, @lenker.mass)
+    assert_equal(7610, @fahrrad.calc_mass)
+    assert_equal(310, @lenker.calc_mass)
     assert_equal(10, @fahrrad.parts_count)
     assert_equal(10, @fahrrad.count)
     @lenker.add_part('Spiegel', 20)
