@@ -15,7 +15,7 @@ persons << HawPerson.new('Knut', 'Kurz')
 persons.each do |person|
   class << person
     def individual
-      "individual method called on #{self}"
+      "individual method called on #{person[:forename]}"
     end
   end
 
