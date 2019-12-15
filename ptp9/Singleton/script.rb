@@ -2,6 +2,7 @@
 # Author:: Jonas Krukenberg
 require('singleton')
 
+# A simple class that prints every time that a single method is added to it
 class Clazz
   attr_reader :name
 
@@ -13,44 +14,35 @@ class Clazz
     @name = name
   end
 
+  # third way to add a singleton method
   def self.third_singleton_method
     puts 'third_singleton_method'
   end
 end
 
+# A basic singleton class
 class ClazzSingelton
   include Singleton
   attr_reader :name
 end
-
 a = Clazz.new('tom')
-a2 = Clazz.new('tom2')
+
+# first way to add a singleton method
 a.define_singleton_method(:my_singleton_method) do
   puts 'the singleton method'
 end
-
+# second way to add a singleton method
 def Clazz.second_singleton_method
   puts 'second singleton method'
 end
 
-b = a.singleton_class
-c = a2.singleton_class
+# singleton adn singleton2 point to the same singleton instance
 singleton = ClazzSingelton.instance
 singleton2 = ClazzSingelton.instance
-puts singleton
-puts singleton2
-puts a.inspect
-puts b.inspect
-puts c.inspect
-puts c.name
-puts a == b
-puts c == b
+puts "singleton.equal?(singleton2)=#{singleton.equal?(singleton2)}"
+# singleton_class returns the same instance
+
+b = a.singleton_class
+c = a.singleton_class
+puts "c.equal?(b)=#{c.equal?(b)}"
 a.my_singleton_method
-
-# a2.my_singleton_method # doesnt work
-# b.my_singleton_method # doesnt work
-
-#basicObject = BasicObject.new
-#puts "basicObject=>#{basicObject.class}"
-#basicObjectSingleton = basicObject.singleton_class
-#puts "basicObjectSingleton=>#{basicObjectSingleton.class}"
