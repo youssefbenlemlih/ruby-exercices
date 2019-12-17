@@ -18,7 +18,13 @@ class Person
 
   # Adds a pet to the person
   def add_pet(pet)
+    pet.new_owner(self) if pet.respond_to?(:new_owner)
     @pets << pet
+  end
+
+  # Removes a pet to the person
+  def remove_pet(pet)
+     @pets.delete(pet)
   end
 
   # gives a service to the given Pet

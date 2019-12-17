@@ -8,7 +8,10 @@ require_relative 'part'
 @fahrrad.print_tree
 p @fahrrad.hash
 p @fahrrad2.hash
-
+enumerator = @fahrrad.each do |p|
+  puts p
+  end
+puts enumerator.inspect
 # puts @fahrrad.inject(0) { |mass, p| mass + p.mass }
 # @fahrrad.each do |p|
 #   puts p.mass

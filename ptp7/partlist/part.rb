@@ -96,6 +96,8 @@ class Part
           yield(p)
         end
       end
+    else
+      enum_for
     end
   end
 

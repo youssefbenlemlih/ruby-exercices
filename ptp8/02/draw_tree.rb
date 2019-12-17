@@ -3,5 +3,5 @@
 # this script creates an instance of ChristmasTree and calls console output
 require_relative 'christmas_tree'
 
-t = ChristmasTree.new(6)
+t = ChristmasTree.new(8)
 t.draw_tree

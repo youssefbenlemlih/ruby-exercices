@@ -14,6 +14,11 @@ class Dog < Pet
     person.add_pet(self)
   end
 
+  def new_owner(person)
+    @owner.remove_pet(self)
+    @owner = person
+  end
+
   def to_s
     "#{super}, owner: #{@owner.name}"
   end

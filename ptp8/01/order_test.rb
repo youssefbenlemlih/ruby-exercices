@@ -15,6 +15,13 @@ class NaturalTest < Test::Unit::TestCase
     assert_equal([NaturalOrder.new(1, 3), NaturalOrder.new(1, 4)], @order_12.children)
   end
 
+  def test_spaceship
+    assert_equal(1, NaturalOrder.new(1, 4) <=> NaturalOrder.new(1, 2))
+    assert_equal(0, NaturalOrder.new(1, 4) <=> NaturalOrder.new(1, 4))
+    assert_equal(-1, NaturalOrder.new(1, 2) <=> NaturalOrder.new(1, 4))
+    assert_nil(NaturalOrder.new(1, 4) <=> "Hallo")
+  end
+
   def test_range
     assert_equal([
                      NaturalOrder.new(1, 2),

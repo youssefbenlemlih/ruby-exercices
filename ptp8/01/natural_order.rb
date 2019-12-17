@@ -5,14 +5,16 @@
 # objects of this class can be used in ranges
 class NaturalOrder
   include Comparable
-  attr_reader :value
   # @param [Integer] n exponent of 2
   # @param [Integer] k position in order of uneven natural numbers
   def initialize(n, k = 1)
     @n = n
     @m = 2 * k - 1
     @k = k
-    @value = @m * 2 ** @n
+  end
+  
+  def value
+    @m * 2 ** @n  
   end
 
   # define the following object of self (for use in ranges)
@@ -22,13 +24,13 @@ class NaturalOrder
 
   # define criteria for <=>
   def <=>(other)
-    value <=> other.value
+    other.respond_to?(:value) ? value <=> other.value : nil
   end
 
   # this method uses binary operations to calculate params for the parent
   # @return [NaturalOrder] parent object of self
   def parent
-    j = @value
+    j = value
     j = (j - (j & -j)) | ((j & -j) << 1)
     n = @n + 1
     # j = m * 2**n <=>
@@ -44,7 +46,7 @@ class NaturalOrder
     childs = []
     return childs if @n.zero?
 
-    j = @value
+    j = value
     childs << j - ((j & -j) >> 1)
     childs << j + ((j & -j) >> 1)
     childs.map do |j|
@@ -64,6 +66,12 @@ class NaturalOrder
       [child, child.children_all]
     end.flatten
   end
+
+  # def children_all
+  #   children.map do |child|
+  #     [child] + child.children_all
+  #   end
+  # end
 
   # fast calculation of parent params without binary operations
   # @return [NaturalOrder] parent object
@@ -85,18 +93,18 @@ class NaturalOrder
 
   def ==(other)
     return true if equal?(other)
-    return false unless other.is_a?(self.clas)
+    return false unless other.is_a?(self.class)
 
-    @value == other.value
+    value == other.value
   end
 
   alias_method :eql?, :==
 
   def hash
-    @value.hash
+    value.hash
   end
 
   def to_s
-    "value=#{@value}, (m,n)=#{@m},#{@n}"
+    "value=#{value}, (m,n)=#{@m},#{@n}"
   end
 end

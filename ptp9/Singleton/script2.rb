@@ -9,6 +9,9 @@ HawPerson = Struct.new(:forename, :lastname) do
   end
 end
 
+p HawPerson.singleton_class
+p HawPerson.singleton_class.superclass
+
 persons = []
 persons << HawPerson.new('Harald', 'Haudegen')
 persons << HawPerson.new('Detlef', 'Dompfaff')
@@ -26,13 +29,15 @@ persons.each do |person|
     "alternate method called on #{self[:forename]}"
   end
 
-  puts "#{person}\n\tsingleton class: " + person.singleton_class.inspect
-  puts "\tsuperclass: " + person.singleton_class.superclass.inspect
+  puts "#{person}\n\tsingleton class: " + person.class.singleton_class.inspect
+  #p person.singleton_class
+  #p person.singleton_class.superclass
+  puts "\tsuperclass: " + person.class.singleton_class.superclass.inspect
   puts "\t\tsingleton class for individual method: " + person.individual.singleton_class.inspect
   puts "\t\tsuperclass of individual singleton class: " + person.individual.singleton_class.superclass.inspect
   puts
 end
 
-puts 'Singleton Klasse von BasicObject: ' + BasicObject.singleton_class.inspect
-puts 'Oberklasse von BasicObject: ' + BasicObject.superclass.inspect
+#puts 'Singleton Klasse von BasicObject: ' + BasicObject.singleton_class.inspect
+#puts 'Oberklasse von BasicObject: ' + BasicObject.superclass.inspect
 

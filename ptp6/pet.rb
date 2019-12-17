@@ -10,14 +10,16 @@ end
 # A pet has a a name, a birthday, and a number of lifes
 class Pet
   include Consistency
-  attr_reader :name, :alive
-  protected :alive
+  attr_reader :name
 
   def initialize(name, birthday, lifes)
     @name = name
     @birthday = birthday
     @lifes = lifes
-    @alive = true
+  end
+
+  def alive?
+    @lifes > 0
   end
 
   # Requests a service from the given Person
@@ -36,47 +38,42 @@ class Pet
     unless giver.is_a?(Person)
       raise PetError, 'A pet can only get a service from a Person'
     end
-    unless alive
+    unless alive?
       raise PetError, "Cannot receive a service as I (#{@name}) am already dead."
     end
     if service == :stroke
-      puts "I (#{name}) am getting stroked by #{giver.name}"
+      "I (#{name}) am getting stroked by #{giver.name}"
     elsif service == :feed
-      puts "I (#{name}) am getting fed by #{giver.name}"
+      "I (#{name}) am getting fed by #{giver.name}"
     else
       raise PetError, "A Pet cannot receive the service '#{service}'"
     end
   end
 
   def to_s
-    "#{self.class}: name: #{@name}, birthday: #{@birthday}, lifes: #{@lifes}, alive: #{@alive}"
+    "#{self.class}: name: #{@name}, birthday: #{@birthday}, lifes: #{@lifes}, alive: #{alive?}"
   end
 
   # @param [Pet] other The victim
   def kill(other)
-    if !is_a?(Cat) && other.is_a?(Cat)
-      raise CatError, 'Only a cat can kill another Cat.'
-    end
-
-    unless alive
+    unless alive?
       raise PetError, "Cannot kill a Pet as I (#{@name}) am already dead."
     end
 
-    unless other.alive
+    unless other.alive?
       raise PetError, "Cannot kill #{other.name} as it is already dead."
     end
 
-    other.die
+    other.die(self)
   end
 
   protected
 
   # Reduces the lifes by one
-  #  Checks if @alive
-  def die
+  #  Checks if alive?
+  def die(killer)
     @lifes -= 1
-    @alive = @lifes != 0
-    puts "I (#{name}) am now dead" unless @alive
+    "I (#{name}) am now dead" unless alive?
   end
 
 end
